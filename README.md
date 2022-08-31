@@ -1,2 +1,2 @@
-# mannilla
-Automation project for Hydrophonic Farming
+# Mannilla
+Automation project for Hydrophonic farming
