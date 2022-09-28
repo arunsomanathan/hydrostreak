@@ -1,0 +1,54 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2022 ARUN C S
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ */
+
+/*
+ * @author: Arun C S
+ * @email: aruncs009@gmail.com
+ * @since: 08-09-2022
+ */
+
+#include <sensors/moisture-level/moisture-level.h>
+
+namespace Sensors
+{
+  /**
+   * Get singleton instance of ReadSensors class.
+   */
+  auto MoistureLevelSensor::getInstance(byte readPin, byte powerPin) -> MoistureLevelSensor *
+  {
+    if (moistureLevelSensor_ == nullptr)
+    {
+      MoistureLevelSensor::moistureLevelSensor_ = new MoistureLevelSensor(readPin, powerPin);
+    }
+    return MoistureLevelSensor::moistureLevelSensor_;
+  }
+
+  /*
+   * Constructor for setting Read Pin, Power Pin and Delay
+   */
+  MoistureLevelSensor::MoistureLevelSensor(byte readPin, byte powerPin) : Sensor( "Moisture Level", ANALOG, readPin, powerPin)
+  {
+  }
+  }  // namespace Sensors
