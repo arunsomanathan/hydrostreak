@@ -28,22 +28,17 @@
  * @since: 02-10-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#include <gmock/gmock.h>
+#include <memory>
+#include <data/process/process.h>
+#include <ArduinoFake.h>
 
-#include "gmock/gmock.h"
+#ifdef NATIVE
 
-#include <executor/executor.h>
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
-#include "../test_data/test_process/mock-process.h"
-
-class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+TEST(DataProcessTest, IsRunWorking) // NOLINT
 {
-public:
-    MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess) : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
-    MOCK_METHOD(void, setup, (), (const, override));
-    MOCK_METHOD(void, loop, (), (const, override));
-};
+    auto process = std::unique_ptr<Data::Process>(new Data::Process());
+    process->run();
+}
 
 #endif

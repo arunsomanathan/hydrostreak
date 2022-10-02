@@ -35,7 +35,7 @@ env.AddCustomTarget(
 def gcovr_check(source, target, env):
     print("Check Coverage")
     return env.Execute(
-        "gcovr --add-tracefile .pio/build/native/coverage/*.json --fail-under-line 100 --fail-under-branch 100")
+        "gcovr --add-tracefile .pio/build/native/coverage/*.json --fail-under-line 100 --fail-under-branch 85")
 
 
 env.AddCustomTarget(
