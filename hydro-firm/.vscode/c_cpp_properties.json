@@ -10,8 +10,8 @@
             "includePath": [
                 "/home/arun/project/hydrostreak/hydro-firm/include",
                 "/home/arun/project/hydrostreak/hydro-firm/src",
-                "/home/arun/project/hydrostreak/hydro-firm/lib/executor",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/Unity/src",
+                "/home/arun/project/hydrostreak/hydro-firm/lib/hydro-firm",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
                 "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest",
                 "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock",
                 "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
@@ -24,8 +24,8 @@
                 "path": [
                     "/home/arun/project/hydrostreak/hydro-firm/include",
                     "/home/arun/project/hydrostreak/hydro-firm/src",
-                    "/home/arun/project/hydrostreak/hydro-firm/lib/executor",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/Unity/src",
+                    "/home/arun/project/hydrostreak/hydro-firm/lib/hydro-firm",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
                     "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest",
                     "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock",
                     "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",

@@ -28,14 +28,17 @@
  * @since: 03-09-2022
  */
 
-#include <executor.h>
+#include "executor/executor.h"
+#include <sensors/read-sensors/read-sensors.h>
+#include <system/process/process.h>
+#include <data/process/process.h>
 
 #ifdef NATIVE
 #include <cstdio>
 #include <memory>
+#include <ArduinoFake.h>
 
 #else
-// Arduino includes
 #include <Arduino.h>
 
 const MainExecutor::Executor executor; // NOLINT(cert-err58-cpp)
@@ -45,6 +48,7 @@ const MainExecutor::Executor executor; // NOLINT(cert-err58-cpp)
 #if defined NATIVE
 void run(MainExecutor::Executor const *executor)
 {
+  // TODO(aruncs009@gmail.com): Add logging
   executor->setup();
   executor->loop();
 }
@@ -55,6 +59,7 @@ void run(MainExecutor::Executor const *executor)
  */
 void setup()
 {
+  // TODO(aruncs009@gmail.com): Add logging
   executor.setup();
 }
 
@@ -63,6 +68,7 @@ void setup()
  */
 void loop()
 {
+  // TODO(aruncs009@gmail.com): Add logging
   executor.loop();
 }
 
@@ -71,7 +77,11 @@ void loop()
 #if defined NATIVE && !defined UNIT_TEST
 auto main() -> int
 {
-  auto executor = std::unique_ptr<MainExecutor::Executor>(new MainExecutor::Executor());
+  // TODO(aruncs009@gmail.com): Add logging
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
+  auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
+  auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
+  auto executor = std::unique_ptr<MainExecutor::Executor>(new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
   run(executor.get());
   return 0;
 }

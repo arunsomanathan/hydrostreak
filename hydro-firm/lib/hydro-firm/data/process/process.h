@@ -20,30 +20,37 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
 
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 09-09-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#ifndef DATA_PROCESS_PROCESS_H
+#define DATA_PROCESS_PROCESS_H
 
-#include "gmock/gmock.h"
+#include <memory>
 
-#include <executor/executor.h>
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
-#include "../test_data/test_process/mock-process.h"
-
-class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+namespace Data // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
-public:
-    MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess) : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
-    MOCK_METHOD(void, setup, (), (const, override));
-    MOCK_METHOD(void, loop, (), (const, override));
-};
+  class Process
+  {
+  private:
+  public:
+    /*
+     * Constructor
+     */
+    explicit Process();
+
+    /*
+     * Process the system data
+     */
+    virtual auto run() const -> void;
+  };
+
+} // namespace Data
 
 #endif

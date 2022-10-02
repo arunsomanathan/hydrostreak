@@ -25,21 +25,29 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 03-09-2022
+ * @since: 01-10-2022
  */
 
 #include <gmock/gmock.h>
-#include "main.cpp"
+#include <memory>
+#include "main.cpp" //NOLINT(bugprone-suspicious-include)
 #include "test_executor/mock-executor.h"
+#include "test_sensors/test_read-sensors/mock-read-sensors.h"
 
 #ifdef ARDUINO
 #include <Arduino.h>
+#include <cstdint>
+
+const uint32_t BAUD_RATE = 115200;
+
+// Delay in executing system loop
+const uint32_t DELAY = 1000; // In milliseconds
 
 void setup()
 {
     // should be the same value as for the `test_speed` option in "platformio.ini"
     // default value is test_speed=115200
-    Serial.begin(115200);
+    Serial.begin(BAUD_RATE);
 
     ::testing::InitGoogleMock();
 }
@@ -47,30 +55,31 @@ void setup()
 void loop()
 {
     // Run tests
-    if (RUN_ALL_TESTS())
-        ;
+    RUN_ALL_TESTS();
 
     // sleep 1 sec
-    delay(1000);
+    delay(DELAY);
 }
 
 #else
 
 using ::testing::Exactly;
 
-TEST(MainTest, ShouldPass)
+TEST(MainTest, TestLoopAndSetup) // NOLINT
 {
-    MockExecutor executor;
-    EXPECT_CALL(executor, loop()).Times(Exactly(1));
-    EXPECT_CALL(executor, setup()).Times(Exactly(1));
-    run(&executor);
+    auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors());
+    auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
+    auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
+    auto const executor = std::unique_ptr<MockExecutor>(new MockExecutor(mockReadSensors.get(), mockSystemProcess.get(), mockDataProcess.get()));
+    EXPECT_CALL(*executor.get(), loop()).Times(Exactly(1));
+    EXPECT_CALL(*executor.get(), setup()).Times(Exactly(1));
+    run(executor.get());
 }
 
-int main(int argc, char **argv)
+auto main(int argc, char **argv) -> int
 {
     ::testing::InitGoogleMock(&argc, argv);
-    if (RUN_ALL_TESTS())
-        ;
+    RUN_ALL_TESTS();
     // Always return zero-code and allow PlatformIO to parse results
     return 0;
 }

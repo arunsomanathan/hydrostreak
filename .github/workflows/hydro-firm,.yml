@@ -36,6 +36,9 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install gcovr
 
+      - name: Clean Hydro Firm Project before build
+        run: pio run -t clean -e native -e nodemcuv2
+
       - name: Build Hydro Firm Project
         run: pio run
 

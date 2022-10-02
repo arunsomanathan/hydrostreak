@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,30 +20,36 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
 
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 09-09-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#ifndef SYSTEM_PROCESS_PROCESS_H
+#define SYSTEM_PROCESS_PROCESS_H
 
-#include "gmock/gmock.h"
-
-#include <executor/executor.h>
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
-#include "../test_data/test_process/mock-process.h"
-
-class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+namespace System // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
-public:
-    MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess) : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
-    MOCK_METHOD(void, setup, (), (const, override));
-    MOCK_METHOD(void, loop, (), (const, override));
-};
+
+    class Process
+    {
+
+    private:
+    public:
+        /*
+         * Constructor
+         */
+        explicit Process();
+        /*
+         * Run the system processes.
+         */
+        virtual auto run() const -> void;
+    };
+
+} // namespace System
 
 #endif

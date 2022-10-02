@@ -25,47 +25,20 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 29-09-2022
+ * @since: 02-10-2022
  */
 
-#ifndef EXECUTOR_EXECUTOR_H
-#define EXECUTOR_EXECUTOR_H
+#include <gmock/gmock.h>
+#include <memory>
+#include <system/process/process.h>
+#include <ArduinoFake.h>
 
-namespace MainExecutor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+#ifdef NATIVE
+
+TEST(SystemProcessTest, IsRunWorking) // NOLINT
 {
-
-    // const uint32_t BAUD_RATE = 115200;
-
-    // // Delay in executing system loop
-    // const uint32_t DELAY = 1000; // In milliseconds
-
-    // // const uint8_t ARDUINO_UNO = 0;
-    // const uint8_t NODE_MCU = 1;
-
-    // // Type of device
-    // const uint8_t DEVICE_TYPE = NODE_MCU;
-
-    // // Logging enabled
-    // const bool LOGGING_ENABLED = true;
-
-    class Executor
-    {
-
-    private:
-    public:
-        Executor();
-
-        /*
-         * Runner the Setup
-         */
-        virtual void setup() const;
-
-        /*
-         * Runner the Loop
-         */
-        virtual void loop() const;
-    };
-
-} // namespace MainExecutor
+    auto process = std::unique_ptr<System::Process>(new System::Process());
+    process->run();
+}
 
 #endif

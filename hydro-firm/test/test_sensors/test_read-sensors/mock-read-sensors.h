@@ -25,25 +25,20 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 01-10-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#ifndef TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
+#define TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
 
 #include "gmock/gmock.h"
 
-#include <executor/executor.h>
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
-#include "../test_data/test_process/mock-process.h"
+#include <sensors/read-sensors/read-sensors.h>
 
-class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+class MockReadSensors : public Sensors::ReadSensors
 {
 public:
-    MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess) : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
-    MOCK_METHOD(void, setup, (), (const, override));
-    MOCK_METHOD(void, loop, (), (const, override));
+    MOCK_METHOD(void, readAllSensors, (), (const, override));
 };
 
 #endif

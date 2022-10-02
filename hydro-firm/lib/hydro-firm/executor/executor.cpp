@@ -28,36 +28,41 @@
  * @since: 29-09-2022
  */
 
-#include <executor.h>
+#include "executor/executor.h"
 
 #include <cstdio>
+#include <memory>
+
+#ifdef NATIVE
+#include <ArduinoFake.h>
+#else
+#include <Arduino.h>
+#endif
 
 /*
  * Constructor
  */
-MainExecutor::Executor::Executor() = default;
-// {
-//     Read Sensors
-//     this->readSensors = Sensors::ReadSensors::getInstance();
-
-//     // System Process
-//     this->systemProcess = System::Process::getInstance();
-
-//     // Data Processor
-//     this->dataProcess = Data::Process::getInstance();
-// }
+MainExecutor::Executor::Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess) : readSensors(readSensors), systemProcess(systemProcess), dataProcess(dataProcess)
+{
+    // If the dependency was not defined, throw an exception.
+    if (readSensors == nullptr || systemProcess == nullptr || dataProcess == nullptr)
+    {
+        throw std::invalid_argument("readSensors, systemProcess and dataProcess must not be null");
+    }
+}
 
 /**
  * Runner the setup
  */
 void MainExecutor::Executor::setup() const
 {
-    //  Serial.begin(BAUD_RATE);
+    // TODO(aruncs009@gmail.com): Add logging
+    Serial.begin(BAUD_RATE);
 
-    // if (DEVICE_TYPE == NODE_MCU)
-    // {
-    //     // setupNodeMCU();
-    // }
+    if (DEVICE_TYPE == NODE_MCU)
+    {
+        // setupNodeMCU();
+    }
     // Reset Sesonr Values to default
     // Reset Cool Down Period
     // Reset Water Cycle Timer
@@ -69,21 +74,21 @@ void MainExecutor::Executor::setup() const
  */
 void MainExecutor::Executor::loop() const
 {
+    // TODO(aruncs009@gmail.com): Add logging
     //  Logger::notice("Begin Loop");
     //  Get duration in millisecond after the system started Runnerning
     //   TODO(arunc): The value of millis will go back to zero in about 50 days
     //   time. This needs to be handled.
-    //   TODO(arunc): Move this to a function
+    //   TODO(aruncs009@gmail.com): Move this to a function
     //  unsigned long currentMillis = millis();
+    this->readSensors->readAllSensors();
 
-    // this->readSensors->readAllSensors();
+    this->systemProcess->run();
 
-    // this->systemProcess->run();
-
-    // this->dataProcess->run();
+    this->dataProcess->run();
 
     // Logger::notice("Delay");
-    // delay(DELAY);
+    delay(DELAY);
 
     // Logger::notice("Repeating Loop");
 }
