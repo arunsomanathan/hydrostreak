@@ -8,6 +8,7 @@ on:
       - "releases/**"
     paths:
       - "hydro-firm/**"
+      - ".github/**"
 
 defaults:
   run:
@@ -40,13 +41,10 @@ jobs:
         run: pio run -t clean -e native -e nodemcuv2
 
       - name: Build Hydro Firm Project
-        run: pio run
+        run: pio run -e native -e nodemcuv2
 
-      - name: Run Check on Hydro Firm Project native environment
-        run: pio check -e native --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low
-
-      - name: Run Check on Hydro Firm Project nodemcuv2 environment
-        run: pio check -e nodemcuv2 --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low
+      - name: Run Check on Hydro Firm Project native and nodemcuv2 environment
+        run: pio check -e native -e nodemcuv2  --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low
 
       - name: Clean Project before Test and Code Coverage for Native Environment
         run: pio run -t clean
