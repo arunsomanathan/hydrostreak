@@ -1,0 +1,50 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/arun/project/hydrostreak/hydro-firm/include",
+                "/home/arun/project/hydrostreak/hydro-firm/src",
+                "/home/arun/project/hydrostreak/hydro-firm/lib/executor",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/Unity/src",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest",
+                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest/include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/arun/project/hydrostreak/hydro-firm/include",
+                    "/home/arun/project/hydrostreak/hydro-firm/src",
+                    "/home/arun/project/hydrostreak/hydro-firm/lib/executor",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/Unity/src",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest",
+                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest/include",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60104",
+                "NATIVE",
+                ""
+            ],
+            "cppStandard": "c++11",
+            "compilerPath": "/usr/bin/gcc",
+            "compilerArgs": [
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

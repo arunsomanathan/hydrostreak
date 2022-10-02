@@ -1,0 +1,12 @@
+[
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/lib9d9/executor/executor.o -c -DPLATFORMIO=60104 -DNATIVE -Ilib/executor lib/executor/executor.cpp",
+        "directory": "/home/arun/project/hydrostreak/hydro-firm",
+        "file": "/home/arun/project/hydrostreak/hydro-firm/lib/executor/executor.cpp"
+    },
+    {
+        "command": "/usr/bin/g++ -o .pio/build/native/src/main.o -c -std=c++11 -DPLATFORMIO=60104 -DNATIVE -Iinclude -Isrc -Ilib/executor src/main.cpp",
+        "directory": "/home/arun/project/hydrostreak/hydro-firm",
+        "file": "/home/arun/project/hydrostreak/hydro-firm/src/main.cpp"
+    }
+]

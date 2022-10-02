@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": true,
+    "files.associations": {
+        "cstdint": "cpp",
+        "cstdio": "cpp"
+    },
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}/.vscode/compile_commands.json",
+}
