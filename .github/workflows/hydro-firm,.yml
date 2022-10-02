@@ -1,0 +1,59 @@
+name: PlatformIO CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - "releases/**"
+    paths:
+      - "hydro-firm/**"
+
+defaults:
+  run:
+    shell: bash
+    working-directory: hydro-firm
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+
+      - name: Install PlatformIO Core
+        run: pip install gcovr
+
+      - name: Build Hydro Firm Project
+        run: pio run
+
+      - name: Run Check on Hydro Firm Project native environment
+        run: pio check -e native --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low
+
+      - name: Run Check on Hydro Firm Project nodemcuv2 environment
+        run: pio check -e nodemcuv2 --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low
+
+      - name: Clean Project before Test and Code Coverage for Native Environment
+        run: pio run -t clean
+
+      - name: Run Tests on Hydro Firm Project for Native environment
+        run: pio test -e native
+
+      - name: Generate Code Coverage JSON
+        run: pio run -t gcovr-json
+
+      - name: Verify Code Coverage
+        run: pio run -t gcovr-check
+

@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "Hydro-Firm",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"editor.formatOnSave": true
+	}
+}
