@@ -32,6 +32,7 @@
 
 #include <cstdio>
 #include <memory>
+#include <stdexcept>
 
 #ifdef NATIVE
 #include <ArduinoFake.h>

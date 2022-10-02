@@ -32,16 +32,16 @@
 #include <sensors/read-sensors/read-sensors.h>
 #include <system/process/process.h>
 #include <data/process/process.h>
+#include <memory>
 
 #ifdef NATIVE
 #include <cstdio>
-#include <memory>
 #include <ArduinoFake.h>
 
 #else
 #include <Arduino.h>
 
-const MainExecutor::Executor executor; // NOLINT(cert-err58-cpp)
+std::unique_ptr<MainExecutor::Executor> executor = nullptr; // NOLINT
 
 #endif
 
@@ -60,7 +60,11 @@ void run(MainExecutor::Executor const *executor)
 void setup()
 {
   // TODO(aruncs009@gmail.com): Add logging
-  executor.setup();
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
+  auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
+  auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
+  executor = std::unique_ptr<MainExecutor::Executor>(new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
+  executor->setup();
 }
 
 /**
@@ -69,7 +73,7 @@ void setup()
 void loop()
 {
   // TODO(aruncs009@gmail.com): Add logging
-  executor.loop();
+  executor->loop();
 }
 
 #endif
