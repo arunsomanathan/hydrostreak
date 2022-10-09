@@ -28,19 +28,20 @@
  * @since: 02-10-2022
  */
 
+#include <ArduinoFake.h>
 #include <gmock/gmock.h>
 #include <memory>
 #include <sensors/read-sensors/read-sensors.h>
-#include <ArduinoFake.h>
 
 #ifdef NATIVE
+namespace {
 using namespace fakeit; // NOLINT(google-build-using-namespace)
 using ::testing::Exactly;
 
-TEST(ReadSensorsTest, IsReadAllSensorsWorking) // NOLINT
-{
-    auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
-    readSensors->readAllSensors();
+// cppcheck-suppress [syntaxError,unmatchedSuppression]
+TEST(ReadSensorsTest, IsReadAllSensorsWorking) { // NOLINT
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
+  readSensors->readAllSensors();
 }
-
+} // namespace
 #endif

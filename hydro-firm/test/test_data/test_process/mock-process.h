@@ -35,10 +35,9 @@
 
 #include <data/process/process.h>
 
-class MockDataProcess : public Data::Process
-{
+class MockDataProcess : public Data::Process {
 public:
-    MOCK_METHOD(void, run, (), (const, override));
+  MOCK_METHOD(void, run, (), (const, override));
 };
 
 #endif

@@ -35,51 +35,46 @@
 namespace Sensors // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
 
-  // Always keep SENSOR_MAX as the last item in the enum.
-  enum ACTIVE_SENSOR
-  {
-    WATER_LEVEL_SENSOR,
-    MOISTURE_LEVEL_SENSOR
-  };
+// Always keep SENSOR_MAX as the last item in the enum.
+enum ACTIVE_SENSOR { WATER_LEVEL_SENSOR, MOISTURE_LEVEL_SENSOR };
 
-  // TODO(arunc): this may be an issue on using a different microcontroller
-  // const uint8_t ANALOG_READ_PIN = 02; // A0 Pin
-  // const uint8_t POWER_PIN = 16;       // D8 Pin
+// TODO(arunc): this may be an issue on using a different microcontroller
+// const uint8_t ANALOG_READ_PIN = 02; // A0 Pin
+// const uint8_t POWER_PIN = 16;       // D8 Pin
 
-  class ReadSensors
-  {
+class ReadSensors {
 
-  private:
-    // WaterLevelSensor *waterLevelSensor;
-    // MoistureLevelSensor *moistureLevelSensor;
-    // int16_t sensorReadings[MOISTURE_LEVEL_SENSOR + 1]{};
+private:
+  // WaterLevelSensor *waterLevelSensor;
+  // MoistureLevelSensor *moistureLevelSensor;
+  // int16_t sensorReadings[MOISTURE_LEVEL_SENSOR + 1]{};
 
-  public:
-    /*
-     * Constructor
-     */
-    ReadSensors();
+public:
+  /*
+   * Constructor
+   */
+  ReadSensors();
 
-    /*
-     * Read all sensors.
-     */
-    virtual void readAllSensors() const;
+  /*
+   * Read all sensors.
+   */
+  virtual void readAllSensors() const;
 
-    /*
-     * Read a specific sensors.
-     */
-    // virtual void readASensor(ACTIVE_SENSOR activeSensor) const;
+  /*
+   * Read a specific sensors.
+   */
+  // virtual void readASensor(ACTIVE_SENSOR activeSensor) const;
 
-    /*
-     * Method for getting the sensor reading
-     */
-    // virtual short *getAllSensorReading() const;
+  /*
+   * Method for getting the sensor reading
+   */
+  // virtual short *getAllSensorReading() const;
 
-    /*
-     * Method for getting the reading of a specific sensor
-     */
-    // virtual short getASensorReading(ACTIVE_SENSOR activeSensor) const;
-  };
+  /*
+   * Method for getting the reading of a specific sensor
+   */
+  // virtual short getASensorReading(ACTIVE_SENSOR activeSensor) const;
+};
 
 } // namespace Sensors
 

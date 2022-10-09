@@ -29,14 +29,14 @@
  */
 
 #include "executor/executor.h"
-#include <sensors/read-sensors/read-sensors.h>
-#include <system/process/process.h>
 #include <data/process/process.h>
 #include <memory>
+#include <sensors/read-sensors/read-sensors.h>
+#include <system/process/process.h>
 
 #ifdef NATIVE
-#include <cstdio>
 #include <ArduinoFake.h>
+#include <cstdio>
 
 #else
 #include <Arduino.h>
@@ -46,8 +46,7 @@ std::unique_ptr<MainExecutor::Executor> executor = nullptr; // NOLINT
 #endif
 
 #if defined NATIVE
-void run(MainExecutor::Executor const *executor)
-{
+void run(MainExecutor::Executor const *executor) {
   // TODO(aruncs009@gmail.com): Add logging
   executor->setup();
   executor->loop();
@@ -57,21 +56,20 @@ void run(MainExecutor::Executor const *executor)
 /**
  * Initial setup
  */
-void setup()
-{
+void setup() {
   // TODO(aruncs009@gmail.com): Add logging
   auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
   auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
   auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
-  executor = std::unique_ptr<MainExecutor::Executor>(new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
+  executor = std::unique_ptr<MainExecutor::Executor>(
+      new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
   executor->setup();
 }
 
 /**
  * Main Loop
  */
-void loop()
-{
+void loop() {
   // TODO(aruncs009@gmail.com): Add logging
   executor->loop();
 }
@@ -79,13 +77,13 @@ void loop()
 #endif
 
 #if defined NATIVE && !defined UNIT_TEST
-auto main() -> int
-{
+auto main() -> int {
   // TODO(aruncs009@gmail.com): Add logging
   auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
   auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
   auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
-  auto executor = std::unique_ptr<MainExecutor::Executor>(new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
+  auto executor = std::unique_ptr<MainExecutor::Executor>(
+      new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
   run(executor.get());
   return 0;
 }

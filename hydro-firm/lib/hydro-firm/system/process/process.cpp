@@ -39,6 +39,4 @@ System::Process::Process() = default;
 /*
  * Run the system processes.
  */
-void System::Process::run() const
-{
-}
+void System::Process::run() const {}

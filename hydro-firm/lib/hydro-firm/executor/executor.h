@@ -32,48 +32,47 @@
 #define EXECUTOR_EXECUTOR_H
 
 #include <cstdint>
+#include <data/process/process.h>
 #include <sensors/read-sensors/read-sensors.h>
 #include <system/process/process.h>
-#include <data/process/process.h>
 
 namespace MainExecutor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
 
-    const uint32_t BAUD_RATE = 115200;
+const uint32_t BAUD_RATE = 115200;
 
-    // Delay in executing system loop
-    const uint32_t DELAY = 1000; // In milliseconds
+// Delay in executing system loop
+const uint32_t DELAY = 1000; // In milliseconds
 
-    // const uint8_t ARDUINO_UNO = 0;
-    const uint8_t NODE_MCU = 1;
+// const uint8_t ARDUINO_UNO = 0;
+const uint8_t NODE_MCU = 1;
 
-    // Type of device
-    const uint8_t DEVICE_TYPE = NODE_MCU;
+// Type of device
+const uint8_t DEVICE_TYPE = NODE_MCU;
 
-    // Logging enabled
-    const bool LOGGING_ENABLED = true;
+// Logging enabled
+const bool LOGGING_ENABLED = true;
 
-    class Executor
-    {
+class Executor {
 
-    private:
-        Sensors::ReadSensors *readSensors = nullptr;
-        System::Process *systemProcess = nullptr;
-        Data::Process *dataProcess = nullptr;
+private:
+  Sensors::ReadSensors *readSensors = nullptr;
+  System::Process *systemProcess = nullptr;
+  Data::Process *dataProcess = nullptr;
 
-    public:
-        explicit Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess);
+public:
+  explicit Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess);
 
-        /*
-         * Runner the Setup
-         */
-        virtual void setup() const;
+  /*
+   * Runner the Setup
+   */
+  virtual void setup() const;
 
-        /*
-         * Runner the Loop
-         */
-        virtual void loop() const;
-    };
+  /*
+   * Runner the Loop
+   */
+  virtual void loop() const;
+};
 
 } // namespace MainExecutor
 

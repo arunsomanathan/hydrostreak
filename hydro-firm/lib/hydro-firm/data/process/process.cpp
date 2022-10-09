@@ -39,6 +39,4 @@ Data::Process::Process() = default;
 /*
  * Run the system processes.
  */
-void Data::Process::run() const
-{
-}
+void Data::Process::run() const {}

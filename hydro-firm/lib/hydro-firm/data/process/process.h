@@ -36,20 +36,19 @@
 
 namespace Data // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
-  class Process
-  {
-  private:
-  public:
-    /*
-     * Constructor
-     */
-    explicit Process();
+class Process {
+private:
+public:
+  /*
+   * Constructor
+   */
+  explicit Process();
 
-    /*
-     * Process the system data
-     */
-    virtual auto run() const -> void;
-  };
+  /*
+   * Process the system data
+   */
+  virtual auto run() const -> void;
+};
 
 } // namespace Data
 
