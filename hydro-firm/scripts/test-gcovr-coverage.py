@@ -44,3 +44,15 @@ env.AddCustomTarget(
     gcovr_check,
     title="gcovr-check",
     description="Verify code coverage")
+
+# Run all together
+env.AddCustomTarget(
+    name="gcovr",
+    dependencies=None,
+    actions=[
+        "pio run -t gcovr-json",
+        "pio run -t gcovr-html",
+        "pio run -t gcovr-check",
+    ],
+    title="gcovr",
+    description="Generate HTML and Verify code coverage")
