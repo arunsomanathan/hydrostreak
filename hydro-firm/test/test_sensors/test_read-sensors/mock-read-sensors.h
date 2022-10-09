@@ -35,10 +35,9 @@
 
 #include <sensors/read-sensors/read-sensors.h>
 
-class MockReadSensors : public Sensors::ReadSensors
-{
+class MockReadSensors : public Sensors::ReadSensors {
 public:
-    MOCK_METHOD(void, readAllSensors, (), (const, override));
+  MOCK_METHOD(void, readAllSensors, (), (const, override));
 };
 
 #endif

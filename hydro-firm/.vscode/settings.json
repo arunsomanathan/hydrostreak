@@ -67,4 +67,5 @@
         "variant": "cpp"
     },
     "sonarlint.pathToCompileCommands": "${workspaceFolder}/.vscode/compile_commands.json",
+    "C_Cpp.clang_format_fallbackStyle": "{ ColumnLimit: 120 }",
 }

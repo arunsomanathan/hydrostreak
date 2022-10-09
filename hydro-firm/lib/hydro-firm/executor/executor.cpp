@@ -43,53 +43,50 @@
 /*
  * Constructor
  */
-MainExecutor::Executor::Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess) : readSensors(readSensors), systemProcess(systemProcess), dataProcess(dataProcess)
-{
-    // If the dependency was not defined, throw an exception.
-    if (readSensors == nullptr || systemProcess == nullptr || dataProcess == nullptr)
-    {
-        throw std::invalid_argument("readSensors, systemProcess and dataProcess must not be null");
-    }
+MainExecutor::Executor::Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess,
+                                 Data::Process *dataProcess)
+    : readSensors(readSensors), systemProcess(systemProcess), dataProcess(dataProcess) {
+  // If the dependency was not defined, throw an exception.
+  if (readSensors == nullptr || systemProcess == nullptr || dataProcess == nullptr) {
+    throw std::invalid_argument("readSensors, systemProcess and dataProcess must not be null"); // LCOV_EXCL_BR_LINE
+  }
 }
 
 /**
  * Runner the setup
  */
-void MainExecutor::Executor::setup() const
-{
-    // TODO(aruncs009@gmail.com): Add logging
-    Serial.begin(BAUD_RATE);
+void MainExecutor::Executor::setup() const {
+  // TODO(aruncs009@gmail.com): Add logging
+  Serial.begin(BAUD_RATE);
 
-    if (DEVICE_TYPE == NODE_MCU)
-    {
-        // setupNodeMCU();
-    }
-    // Reset Sesonr Values to default
-    // Reset Cool Down Period
-    // Reset Water Cycle Timer
-    // Set Water Cycle off
+  if (DEVICE_TYPE == NODE_MCU) {
+    // setupNodeMCU();
+  }
+  // Reset Sesonr Values to default
+  // Reset Cool Down Period
+  // Reset Water Cycle Timer
+  // Set Water Cycle off
 }
 
 /**
  * Main Loop
  */
-void MainExecutor::Executor::loop() const
-{
-    // TODO(aruncs009@gmail.com): Add logging
-    //  Logger::notice("Begin Loop");
-    //  Get duration in millisecond after the system started Runnerning
-    //   TODO(arunc): The value of millis will go back to zero in about 50 days
-    //   time. This needs to be handled.
-    //   TODO(aruncs009@gmail.com): Move this to a function
-    //  unsigned long currentMillis = millis();
-    this->readSensors->readAllSensors();
+void MainExecutor::Executor::loop() const {
+  // TODO(aruncs009@gmail.com): Add logging
+  //  Logger::notice("Begin Loop");
+  //  Get duration in millisecond after the system started Runnerning
+  //   TODO(arunc): The value of millis will go back to zero in about 50 days
+  //   time. This needs to be handled.
+  //   TODO(aruncs009@gmail.com): Move this to a function
+  //  unsigned long currentMillis = millis();
+  this->readSensors->readAllSensors();
 
-    this->systemProcess->run();
+  this->systemProcess->run();
 
-    this->dataProcess->run();
+  this->dataProcess->run();
 
-    // Logger::notice("Delay");
-    delay(DELAY);
+  // Logger::notice("Delay");
+  delay(DELAY);
 
-    // Logger::notice("Repeating Loop");
+  // Logger::notice("Repeating Loop");
 }

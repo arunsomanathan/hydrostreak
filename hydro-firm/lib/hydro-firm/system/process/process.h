@@ -35,20 +35,19 @@
 namespace System // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
 
-    class Process
-    {
+class Process {
 
-    private:
-    public:
-        /*
-         * Constructor
-         */
-        explicit Process();
-        /*
-         * Run the system processes.
-         */
-        virtual auto run() const -> void;
-    };
+private:
+public:
+  /*
+   * Constructor
+   */
+  explicit Process();
+  /*
+   * Run the system processes.
+   */
+  virtual auto run() const -> void;
+};
 
 } // namespace System
 

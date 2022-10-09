@@ -28,17 +28,17 @@
  * @since: 02-10-2022
  */
 
+#include <ArduinoFake.h>
+#include <data/process/process.h>
 #include <gmock/gmock.h>
 #include <memory>
-#include <data/process/process.h>
-#include <ArduinoFake.h>
 
 #ifdef NATIVE
 
-TEST(DataProcessTest, IsRunWorking) // NOLINT
-{
-    auto process = std::unique_ptr<Data::Process>(new Data::Process());
-    process->run();
+namespace {
+TEST(DataProcessTest, IsRunWorking) { // NOLINT
+  auto process = std::unique_ptr<Data::Process>(new Data::Process());
+  process->run();
 }
-
+} // namespace
 #endif

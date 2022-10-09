@@ -35,10 +35,9 @@
 
 #include <system/process/process.h>
 
-class MockSystemProcess : public System::Process
-{
+class MockSystemProcess : public System::Process {
 public:
-    MOCK_METHOD(void, run, (), (const, override));
+  MOCK_METHOD(void, run, (), (const, override));
 };
 
 #endif

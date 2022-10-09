@@ -46,8 +46,7 @@ Sensors::ReadSensors::ReadSensors() = default;
 /*
  * Read all sensors.
  */
-void Sensors::ReadSensors::readAllSensors() const
-{
+void Sensors::ReadSensors::readAllSensors() const {
   // Logger::notice("Sensors>Read-Sensors", "Start reading sensors");
 
   // // Read moisture level
