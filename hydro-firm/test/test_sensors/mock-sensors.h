@@ -25,26 +25,29 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 11-10-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#ifndef TEST_SENSORS_TEST_SENSORS_H
+#define TEST_SENSORS_TEST_SENSORS_H
 
 #include <gmock/gmock.h>
+#include <string>
 
-#include "../test_data/test_process/mock-process.h"
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
-#include <executor/executor.h>
+#include <sensors/sensor.h>
 
-class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+class MockSensor : public Sensors::Sensor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
+
 public:
-  MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess)
-      : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
-  MOCK_METHOD(void, setup, (), (const, override));
-  MOCK_METHOD(void, loop, (), (const, override));
+  // cppcheck-suppress [passedByValue,unmatchedSuppression]
+  MockSensor(const std::string sensorType, const uint8_t readPin, const uint8_t powerPin)
+      : Sensors::Sensor(sensorType, Sensors::ANALOG, readPin, powerPin) {}
+  MOCK_METHOD(void, readSensor, (), (override));
+  MOCK_METHOD(void, initSensor, (), (override));
+  MOCK_METHOD(void, resetSensor, (), (override));
+  MOCK_METHOD(int, getReading, (), (const, override));
+  MOCK_METHOD(std::string, getType, (), (override));
 };
 
 #endif

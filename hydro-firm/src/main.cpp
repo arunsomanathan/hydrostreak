@@ -30,8 +30,12 @@
 
 #include "executor/executor.h"
 #include <data/process/process.h>
+#include <list>
 #include <memory>
+#include <sensors/moisture-level/moisture-level.h>
 #include <sensors/read-sensors/read-sensors.h>
+#include <sensors/sensor.h>
+#include <sensors/water-level/water-level.h>
 #include <system/process/process.h>
 
 #ifdef NATIVE
@@ -58,7 +62,11 @@ void run(MainExecutor::Executor const *executor) {
  */
 void setup() {
   // TODO(aruncs009@gmail.com): Add logging
-  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
+  auto moistureLevelSensor = std::unique_ptr<Sensors::MoistureLevelSensor>(new Sensors::MoistureLevelSensor(1, 1));
+  auto waterLevelSensor = std::unique_ptr<Sensors::WaterLevelSensor>(new Sensors::WaterLevelSensor(1, 1));
+  // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+  std::list<Sensors::Sensor *> sensors = {moistureLevelSensor.get(), waterLevelSensor.get()};
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
   auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
   auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
   executor = std::unique_ptr<MainExecutor::Executor>(
@@ -79,7 +87,11 @@ void loop() {
 #if defined NATIVE && !defined UNIT_TEST
 auto main() -> int {
   // TODO(aruncs009@gmail.com): Add logging
-  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
+  auto moistureLevelSensor = std::unique_ptr<Sensors::MoistureLevelSensor>(new Sensors::MoistureLevelSensor(1, 1));
+  auto waterLevelSensor = std::unique_ptr<Sensors::WaterLevelSensor>(new Sensors::WaterLevelSensor(1, 1));
+  // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+  std::list<Sensors::Sensor *> sensors = {moistureLevelSensor.get(), waterLevelSensor.get()};
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
   auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
   auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
   auto executor = std::unique_ptr<MainExecutor::Executor>(

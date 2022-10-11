@@ -30,6 +30,7 @@
 
 #include "main.cpp" //NOLINT(bugprone-suspicious-include)
 #include "test_executor/mock-executor.h"
+#include "test_sensors/mock-sensors.h"
 #include "test_sensors/test_read-sensors/mock-read-sensors.h"
 #include <gmock/gmock.h>
 #include <memory>
@@ -63,8 +64,9 @@ void loop() {
 
 using ::testing::Exactly;
 
-TEST(MainTest, TestLoopAndSetup) { // NOLINT
-  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors());
+TEST(MainTest, TestLoopAndSetup) {           // NOLINT
+  std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
+  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors(sensors));
   auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
   auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
   auto const executor = std::unique_ptr<MockExecutor>(

@@ -28,6 +28,7 @@
  * @since: 02-10-2022
  */
 
+#include "../mock-sensors.h"
 #include <ArduinoFake.h>
 #include <gmock/gmock.h>
 #include <memory>
@@ -37,11 +38,57 @@
 namespace {
 using namespace fakeit; // NOLINT(google-build-using-namespace)
 using ::testing::Exactly;
+using ::testing::Return;
+
+auto const READ_PIN = 1;
+auto const POWER_PIN = 2;
+auto const DEFAULT_READ_VALUE = 123;
+std::string const FIRST_SENSOR_TYPE = "First Sensor";
+std::string const SECOND_SENSOR_TYPE = "Second Sensor";
+
+//  cppcheck-suppress [syntaxError,unmatchedSuppression]
+TEST(ReadSensorsTest, IsReadSingleSensorsWorking) { // NOLINT
+
+  auto const mockSensor = std::unique_ptr<MockSensor>(new MockSensor(FIRST_SENSOR_TYPE, READ_PIN, POWER_PIN));
+  std::list<Sensors::Sensor *> sensors = {mockSensor.get()}; // NOLINT(cppcoreguidelines-init-variables)
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
+  EXPECT_CALL(*mockSensor.get(), readSensor()).Times(Exactly(1));
+  EXPECT_CALL(*mockSensor.get(), getType()).Times(Exactly(1)).WillOnce(Return(FIRST_SENSOR_TYPE));
+  EXPECT_CALL(*mockSensor.get(), getReading()).Times(1).WillOnce(Return(DEFAULT_READ_VALUE));
+  readSensors->readAllSensors();
+  EXPECT_EQ(readSensors->getAllSensorReading().size(), 1) << "Size of Sensor reading map is incorrect "; // NOLINT
+  EXPECT_EQ(readSensors->getAllSensorReading()[FIRST_SENSOR_TYPE], DEFAULT_READ_VALUE)
+      << "Incorect sensor reading"; // NOLINT
+}
 
 // cppcheck-suppress [syntaxError,unmatchedSuppression]
 TEST(ReadSensorsTest, IsReadAllSensorsWorking) { // NOLINT
-  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors());
+  auto const mockFirstSensor = std::unique_ptr<MockSensor>(new MockSensor(FIRST_SENSOR_TYPE, READ_PIN, POWER_PIN));
+  auto const mockSecondSensor = std::unique_ptr<MockSensor>(new MockSensor(SECOND_SENSOR_TYPE, READ_PIN, POWER_PIN));
+  // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+  std::list<Sensors::Sensor *> sensors = {mockFirstSensor.get(), mockSecondSensor.get()};
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
+  EXPECT_CALL(*mockFirstSensor.get(), readSensor()).Times(Exactly(1));
+  EXPECT_CALL(*mockFirstSensor.get(), getType()).Times(Exactly(1)).WillOnce(Return(FIRST_SENSOR_TYPE));
+  EXPECT_CALL(*mockFirstSensor.get(), getReading()).Times(1).WillOnce(Return(DEFAULT_READ_VALUE));
+  EXPECT_CALL(*mockSecondSensor.get(), readSensor()).Times(Exactly(1));
+  EXPECT_CALL(*mockSecondSensor.get(), getType()).Times(Exactly(1)).WillOnce(Return(SECOND_SENSOR_TYPE));
+  EXPECT_CALL(*mockSecondSensor.get(), getReading()).Times(1).WillOnce(Return(DEFAULT_READ_VALUE));
   readSensors->readAllSensors();
+  EXPECT_EQ(readSensors->getAllSensorReading().size(), 2) << "Size of Sensor reading map is incorrect "; // NOLINT
+  EXPECT_EQ(readSensors->getAllSensorReading()[FIRST_SENSOR_TYPE], DEFAULT_READ_VALUE)
+      << "Incorect sensor reading"; // NOLINT
+  EXPECT_EQ(readSensors->getAllSensorReading()[SECOND_SENSOR_TYPE], DEFAULT_READ_VALUE)
+      << "Incorect sensor reading"; // NOLINT
 }
+
+//  cppcheck-suppress [syntaxError,unmatchedSuppression]
+TEST(ReadSensorsTest, EmptySensorList) {     // NOLINT
+  std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
+  readSensors->readAllSensors();
+  EXPECT_EQ(readSensors->getAllSensorReading().size(), 0) << "Size of Sensor reading map is incorrect "; // NOLINT
+}
+
 } // namespace
 #endif

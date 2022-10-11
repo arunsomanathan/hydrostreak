@@ -29,7 +29,7 @@
  * @since: 08-09-2022
  */
 
-#ifndef _SENSORS_WATER_LEVEL_WATER_LEVEL_H
+#ifndef SENSORS_WATER_LEVEL_WATER_LEVEL_H
 #define SENSORS_WATER_LEVEL_WATER_LEVEL_H
 
 #include <sensors/sensor.h>

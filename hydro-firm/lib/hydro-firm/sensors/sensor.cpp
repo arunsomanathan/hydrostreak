@@ -117,7 +117,7 @@ void Sensor::powerOffSensor() const {
 void Sensor::readSensor() {
 
   if (this->isPowerOnEnabled) {
-    powerOnSensor();
+    this->powerOnSensor();
     delay(this->readDelay);
   }
 

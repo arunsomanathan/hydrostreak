@@ -98,27 +98,27 @@ public:
   /*
    * Read different sensor data and save for further processing.
    */
-  void readSensor();
+  virtual void readSensor();
 
   /*
    * Initialize sensor before reading.
    */
-  void initSensor();
+  virtual void initSensor();
 
   /*
    * Reset the sensor.
    */
-  void resetSensor();
+  virtual void resetSensor();
 
   /*
    * Get the sensor type
    */
-  auto getType() -> std::string;
+  virtual auto getType() -> std::string;
 
   /*
    * Get the sensor reading value
    */
-  auto getReading() const -> int;
+  virtual auto getReading() const -> int;
 
 protected:
   /*

@@ -31,91 +31,30 @@
 
 #include "sensors/read-sensors/read-sensors.h"
 #include <cstdint>
+#include <iostream>
+#include <list>
+#include <map>
 /*
  * Constructor
  */
 
-Sensors::ReadSensors::ReadSensors() = default;
-// {
-// this->moistureLevelSensor =
-//     MoistureLevelSensor::getInstance(ANALOG_READ_PIN, POWER_PIN);
-// this->waterLevelSensor =
-//     WaterLevelSensor::getInstance(ANALOG_READ_PIN, POWER_PIN);
-// }
+Sensors::ReadSensors::ReadSensors(std::list<Sensors::Sensor *> &sensors) : sensors{sensors} {}
 
 /*
  * Read all sensors.
  */
-void Sensors::ReadSensors::readAllSensors() const {
+void Sensors::ReadSensors::readAllSensors() {
   // Logger::notice("Sensors>Read-Sensors", "Start reading sensors");
-
-  // // Read moisture level
-  // this->moistureLevelSensor->read();
-  // sensorReadings[MOISTURE_LEVEL_SENSOR] =
-  //     this->moistureLevelSensor->getReading();
-
-  // // Read water level
-  // this->waterLevelSensor->read();
-  // sensorReadings[WATER_LEVEL_SENSOR] = this->waterLevelSensor->getReading();
+  for (auto sensor : this->sensors) {
+    sensor->readSensor();                                           // LCOV_EXCL_BR_LINE
+    this->sensorReadings[sensor->getType()] = sensor->getReading(); // LCOV_EXCL_BR_LINE
+  }
 }
-
-/*
- * Read a specific sensors.
- */
-// void Sensors::ReadSensors::readASensor(ACTIVE_SENSOR activeSensor) const
-// {
-//   // switch (activeSensor)
-//   // {
-//   // case MOISTURE_LEVEL_SENSOR:
-//   //   Logger::notice(
-//   //       "Sensors>Read-Sensors",
-//   //       (String("Start reading from ") + this->moistureLevelSensor->getType())
-//   //           .c_str());
-//   //   this->moistureLevelSensor->read();
-//   //   sensorReadings[MOISTURE_LEVEL_SENSOR] =
-//   //       this->moistureLevelSensor->getReading();
-
-//   //   break;
-//   // case WATER_LEVEL_SENSOR:
-//   //   Logger::notice("Sensors>Read-Sensors", (String("Start reading from ") +
-//   //                                           this->waterLevelSensor->getType())
-//   //                                              .c_str());
-//   //   this->waterLevelSensor->read();
-//   //   sensorReadings[WATER_LEVEL_SENSOR] = this->waterLevelSensor->getReading();
-
-//   //   break;
-//   // }
-// }
 
 /*
  * Method for getting the sensor reading
  */
-// auto Sensors::ReadSensors::getAllSensorReading() const -> int16_t *
-// {
-//   // Logger::notice("Sensors>Read-Sensors", "Get sensor reading values");
-//   // return sensorReadings;
-//   return nullptr;
-// }
-
-/*
- * Method for getting the reading of a specific sensor
- */
-// auto Sensors::ReadSensors::getASensorReading(ACTIVE_SENSOR activeSensor) const -> int16_t
-// {
-//   // switch (activeSensor)
-//   // {
-//   // case MOISTURE_LEVEL_SENSOR:
-//   //   Logger::notice("Sensors>Read-Sensors",
-//   //                  (String("Get sensor reading from ") +
-//   //                   this->moistureLevelSensor->getType())
-//   //                      .c_str());
-//   //   return sensorReadings[MOISTURE_LEVEL_SENSOR];
-//   // case WATER_LEVEL_SENSOR:
-//   //   Logger::notice("Sensors>Read-Sensors",
-//   //                  (String("Get sensor reading from ") +
-//   //                   this->waterLevelSensor->getType())
-//   //                      .c_str());
-//   //   return sensorReadings[WATER_LEVEL_SENSOR];
-//   // }
-//   return 0;
-// }
+auto Sensors::ReadSensors::getAllSensorReading() const -> std::map<const std::string, int> {
+  // Logger::notice("Sensors>Read-Sensors", "Get sensor reading values");
+  return this->sensorReadings;
+}
