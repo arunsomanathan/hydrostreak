@@ -73,7 +73,7 @@ TEST(MainTest, TestLoopAndSetup) {           // NOLINT
       new MockExecutor(mockReadSensors.get(), mockSystemProcess.get(), mockDataProcess.get()));
   EXPECT_CALL(*executor.get(), loop()).Times(Exactly(1));
   EXPECT_CALL(*executor.get(), setup()).Times(Exactly(1));
-  run(executor.get());
+  run(executor.get(), 1);
 }
 
 auto main(int argc, char **argv) -> int {
