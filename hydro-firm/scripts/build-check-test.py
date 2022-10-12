@@ -5,10 +5,12 @@ env.AddCustomTarget(
     name="build",
     dependencies=None,
     actions=[
-        "pio run",
-        "pio check",
+        "pio run -e native",
+        "pio run -e nodemcuv2",
+        "pio check -e native --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low",
+        "pio check -e nodemcuv2 --fail-on-defect=high --fail-on-defect=medium --fail-on-defect=low",
         "pio run -t clean",
-        "pio test",
+        "pio test -e native",
         "pio run -t gcovr"
     ],
     title="Build",

@@ -37,7 +37,8 @@
 
 class MockReadSensors : public Sensors::ReadSensors {
 public:
-  MOCK_METHOD(void, readAllSensors, (), (const, override));
+  explicit MockReadSensors(std::list<Sensors::Sensor *> &sensors) : Sensors::ReadSensors(sensors) {}
+  MOCK_METHOD(void, readAllSensors, (), (override));
 };
 
 #endif
