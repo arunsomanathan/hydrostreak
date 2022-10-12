@@ -36,7 +36,6 @@
 
 #ifdef NATIVE
 namespace {
-using namespace fakeit; // NOLINT(google-build-using-namespace)
 using ::testing::Exactly;
 using ::testing::Return;
 

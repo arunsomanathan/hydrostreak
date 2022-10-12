@@ -12,31 +12,31 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/nodemcuv2/firmware.elf",
-            "projectEnvName": "nodemcuv2",
-            "toolchainBinDir": "/home/arun/.platformio/packages/toolchain-xtensa/bin",
+            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/native/program",
+            "projectEnvName": "native",
+            "toolchainBinDir": "",
             "internalConsoleOptions": "openOnSessionStart",
             "preLaunchTask": {
                 "type": "PlatformIO",
-                "task": "Pre-Debug (nodemcuv2)"
+                "task": "Pre-Debug (native)"
             }
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/nodemcuv2/firmware.elf",
-            "projectEnvName": "nodemcuv2",
-            "toolchainBinDir": "/home/arun/.platformio/packages/toolchain-xtensa/bin",
+            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/native/program",
+            "projectEnvName": "native",
+            "toolchainBinDir": "",
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
-            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/nodemcuv2/firmware.elf",
-            "projectEnvName": "nodemcuv2",
-            "toolchainBinDir": "/home/arun/.platformio/packages/toolchain-xtensa/bin",
+            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/native/program",
+            "projectEnvName": "native",
+            "toolchainBinDir": "",
             "internalConsoleOptions": "openOnSessionStart",
             "loadMode": "manual"
         }

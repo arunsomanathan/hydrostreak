@@ -50,10 +50,14 @@ std::unique_ptr<MainExecutor::Executor> executor = nullptr; // NOLINT
 #endif
 
 #if defined NATIVE
-void run(MainExecutor::Executor const *executor) {
+const auto LOOP_COUNT = 10;
+
+void run(MainExecutor::Executor const *executor, const int loopCount) {
   // TODO(aruncs009@gmail.com): Add logging
   executor->setup();
-  executor->loop();
+  for (int i = 1; i <= loopCount; ++i) {
+    executor->loop();
+  }
 }
 #elif !UNIT_TEST
 
@@ -85,7 +89,16 @@ void loop() {
 #endif
 
 #if defined NATIVE && !defined UNIT_TEST
+
+void configureArduinoFake() {
+  fakeit::When(OverloadedMethod(ArduinoFake(Serial), begin, void(unsigned long))).AlwaysReturn();
+  fakeit::When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
+  fakeit::When(Method(ArduinoFake(), delay)).AlwaysReturn();
+  fakeit::When(Method(ArduinoFake(), analogRead)).AlwaysReturn(123);
+}
+
 auto main() -> int {
+  configureArduinoFake();
   // TODO(aruncs009@gmail.com): Add logging
   auto moistureLevelSensor = std::unique_ptr<Sensors::MoistureLevelSensor>(new Sensors::MoistureLevelSensor(1, 1));
   auto waterLevelSensor = std::unique_ptr<Sensors::WaterLevelSensor>(new Sensors::WaterLevelSensor(1, 1));
@@ -96,7 +109,8 @@ auto main() -> int {
   auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
   auto executor = std::unique_ptr<MainExecutor::Executor>(
       new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
-  run(executor.get());
+  run(executor.get(), LOOP_COUNT);
   return 0;
 }
+
 #endif
