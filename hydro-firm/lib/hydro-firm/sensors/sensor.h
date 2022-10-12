@@ -47,14 +47,14 @@ private:
 
   // Sensor type
   const std::string type;
-  // Delay after power on the sensor and reading the value
-  const int16_t readDelay;
+  // Is sensor Analog.pr digital
+  const SENSOR_TYPE isAnalogOrDigital;
   // Pin for reading the sensor
   const uint8_t readPin;
   // Pin for powering the sensor
   const uint8_t powerPin;
-  // Is sensor Analog.pr digital
-  const SENSOR_TYPE isAnalogOrDigital;
+  // Delay after power on the sensor and reading the value
+  const int16_t readDelay;
   // Enable powering on of sensor
   const bool isPowerOnEnabled;
 

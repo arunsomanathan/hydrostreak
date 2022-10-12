@@ -30,12 +30,15 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      
+
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
-      - name: Install PlatformIO Core
+      - name: Install gcovr
         run: pip install gcovr
+
+      - name: Install Valgrind for memory leak testing
+        run: sudo apt install valgrind
 
       - name: Clean Hydro Firm Project before build
         run: pio run -t clean -e native -e nodemcuv2
@@ -58,3 +61,11 @@ jobs:
       - name: Verify Code Coverage
         run: pio run -t gcovr-check
 
+      - name: Clean Project before running memory leak test
+        run: pio run -t clean
+
+      - name: Build the Project for memory leak test
+        run: pio run -e native
+
+      - name: Run memory leak test
+        run: valgrind --error-exitcode=1 --leak-check=full --gen-suppressions=all --suppressions=./valgrind.supp  ./.pio/build/native/program
