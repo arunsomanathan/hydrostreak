@@ -12,20 +12,20 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/native/program",
+            "executable": "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/build/native/program",
             "projectEnvName": "native",
             "toolchainBinDir": "",
             "internalConsoleOptions": "openOnSessionStart",
             "preLaunchTask": {
                 "type": "PlatformIO",
-                "task": "Pre-Debug (native)"
+                "task": "Pre-Debug"
             }
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/native/program",
+            "executable": "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/build/native/program",
             "projectEnvName": "native",
             "toolchainBinDir": "",
             "internalConsoleOptions": "openOnSessionStart"
@@ -34,7 +34,7 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
-            "executable": "/home/arun/project/hydrostreak/hydro-firm/.pio/build/native/program",
+            "executable": "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/build/native/program",
             "projectEnvName": "native",
             "toolchainBinDir": "",
             "internalConsoleOptions": "openOnSessionStart",

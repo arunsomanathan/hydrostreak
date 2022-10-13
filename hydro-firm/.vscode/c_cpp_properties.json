@@ -8,29 +8,19 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/home/arun/project/hydrostreak/hydro-firm/include",
-                "/home/arun/project/hydrostreak/hydro-firm/src",
-                "/home/arun/project/hydrostreak/hydro-firm/lib/hydro-firm",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest",
-                "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest/include",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/include",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/src",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/lib/hydro-firm",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
                 ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/home/arun/project/hydrostreak/hydro-firm/include",
-                    "/home/arun/project/hydrostreak/hydro-firm/src",
-                    "/home/arun/project/hydrostreak/hydro-firm/lib/hydro-firm",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest",
-                    "/home/arun/project/hydrostreak/hydro-firm/.pio/libdeps/native/googletest/googletest/include",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/include",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/src",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/lib/hydro-firm",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
                     ""
                 ]
             },
@@ -39,7 +29,6 @@
                 "NATIVE",
                 ""
             ],
-            "cppStandard": "c++11",
             "compilerPath": "/usr/bin/gcc",
             "compilerArgs": [
                 ""
