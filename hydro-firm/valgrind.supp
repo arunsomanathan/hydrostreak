@@ -1,0 +1,274 @@
+
+{
+   ArduinoFake-1
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI10StreamFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI10StreamFakeJEEC1Ev
+   fun:_ZN6fakeit10FakeObjectI10StreamFakeJEEC1Ev
+   fun:_ZN6fakeit8MockImplI10StreamFakeJEE18createFakeInstanceEv
+   fun:_ZN6fakeit8MockImplI10StreamFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI10StreamFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-2
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI8WireFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI8WireFakeJEEC1Ev
+   fun:_ZN6fakeit12DynamicProxyI8WireFakeJEEC1ERS1_
+   fun:_ZN6fakeit8MockImplI8WireFakeJEEC1ERNS_13FakeitContextERS1_b
+   fun:_ZN6fakeit8MockImplI8WireFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI8WireFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-3
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI8WireFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI8WireFakeJEEC1Ev
+   fun:_ZN6fakeit10FakeObjectI8WireFakeJEEC1Ev
+   fun:_ZN6fakeit8MockImplI8WireFakeJEE18createFakeInstanceEv
+   fun:_ZN6fakeit8MockImplI8WireFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI8WireFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-4
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI10SerialFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI10SerialFakeJEEC1Ev
+   fun:_ZN6fakeit12DynamicProxyI10SerialFakeJEEC1ERS1_
+   fun:_ZN6fakeit8MockImplI10SerialFakeJEEC1ERNS_13FakeitContextERS1_b
+   fun:_ZN6fakeit8MockImplI10SerialFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI10SerialFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-5
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI10SerialFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI10SerialFakeJEEC1Ev
+   fun:_ZN6fakeit10FakeObjectI10SerialFakeJEEC1Ev
+   fun:_ZN6fakeit8MockImplI10SerialFakeJEE18createFakeInstanceEv
+   fun:_ZN6fakeit8MockImplI10SerialFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI10SerialFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-6
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI10ClientFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI10ClientFakeJEEC1Ev
+   fun:_ZN6fakeit12DynamicProxyI10ClientFakeJEEC1ERS1_
+   fun:_ZN6fakeit8MockImplI10ClientFakeJEEC1ERNS_13FakeitContextERS1_b
+   fun:_ZN6fakeit8MockImplI10ClientFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI10ClientFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-7
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI10ClientFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI10ClientFakeJEEC1Ev
+   fun:_ZN6fakeit10FakeObjectI10ClientFakeJEEC1Ev
+   fun:_ZN6fakeit8MockImplI10ClientFakeJEE18createFakeInstanceEv
+   fun:_ZN6fakeit8MockImplI10ClientFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI10ClientFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-8
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI10StreamFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI10StreamFakeJEEC1Ev
+   fun:_ZN6fakeit12DynamicProxyI10StreamFakeJEEC1ERS1_
+   fun:_ZN6fakeit8MockImplI10StreamFakeJEEC1ERNS_13FakeitContextERS1_b
+   fun:_ZN6fakeit8MockImplI10StreamFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI10StreamFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-9
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI12FunctionFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI12FunctionFakeJEEC1Ev
+   fun:_ZN6fakeit12DynamicProxyI12FunctionFakeJEEC1ERS1_
+   fun:_ZN6fakeit8MockImplI12FunctionFakeJEEC1ERNS_13FakeitContextERS1_b
+   fun:_ZN6fakeit8MockImplI12FunctionFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI12FunctionFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-10
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI12FunctionFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI12FunctionFakeJEEC1Ev
+   fun:_ZN6fakeit10FakeObjectI12FunctionFakeJEEC1Ev
+   fun:_ZN6fakeit8MockImplI12FunctionFakeJEE18createFakeInstanceEv
+   fun:_ZN6fakeit8MockImplI12FunctionFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI12FunctionFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-11
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI9PrintFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI9PrintFakeJEEC1Ev
+   fun:_ZN6fakeit12DynamicProxyI9PrintFakeJEEC1ERS1_
+   fun:_ZN6fakeit8MockImplI9PrintFakeJEEC1ERNS_13FakeitContextERS1_b
+   fun:_ZN6fakeit8MockImplI9PrintFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI9PrintFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-12
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znam
+   fun:_ZN6fakeit12VirtualTableI9PrintFakeJEE12buildVTArrayEv
+   fun:_ZN6fakeit12VirtualTableI9PrintFakeJEEC1Ev
+   fun:_ZN6fakeit10FakeObjectI9PrintFakeJEEC1Ev
+   fun:_ZN6fakeit8MockImplI9PrintFakeJEE18createFakeInstanceEv
+   fun:_ZN6fakeit8MockImplI9PrintFakeJEEC1ERNS_13FakeitContextE
+   fun:_ZN6fakeit4MockI9PrintFakeJEEC1Ev
+   fun:_ZN16ArduinoFakeMocksC1Ev
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+}
+
+{
+   ArduinoFake-13
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+   fun:__libc_csu_init
+   fun:(below main)
+}
+
+{
+   SerialFake-1
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:__cxa_allocate_exception
+   fun:_ZN6fakeit17StandaloneAdapter6handleERKNS_25UnexpectedMethodCallEventE
+   fun:_ZN6fakeit13FakeitContext6handleERKNS_25UnexpectedMethodCallEventE
+   fun:_ZN6fakeit8MockImplI10SerialFakeJEE8unmockedEv
+   fun:_ZN7Serial_5beginEm
+   fun:_ZNK12MainExecutor8Executor5setupEv
+   fun:_Z3runPKN12MainExecutor8ExecutorE
+   fun:main
+}
+
+{
+   SerialFake-2
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:_Znwm
+   fun:_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE12_M_constructIPcEEvT_S7_St20forward_iterator_tag
+   fun:_ZN6fakeit29UnexpectedMethodCallExceptionC1ENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
+   fun:_ZN6fakeit17StandaloneAdapter6handleERKNS_25UnexpectedMethodCallEventE
+   fun:_ZN6fakeit13FakeitContext6handleERKNS_25UnexpectedMethodCallEventE
+   fun:_ZN6fakeit8MockImplI10SerialFakeJEE8unmockedEv
+   fun:_ZN7Serial_5beginEm
+   fun:_ZNK12MainExecutor8Executor5setupEv
+   fun:_Z3runPKN12MainExecutor8ExecutorE
+   fun:main
+}
+
+{
+   SerialFake-3
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:_Znwm
+   fun:_ZN18ArduinoFakeContextC1Ev
+   fun:_Z21getArduinoFakeContextv
+   fun:_Z41__static_initialization_and_destruction_0ii
+   fun:_GLOBAL__sub_I__ZN7Serial_5beginEm
+   fun:call_init
+   fun:__libc_start_main@@GLIBC_2.34
+   fun:(below main)
+}
