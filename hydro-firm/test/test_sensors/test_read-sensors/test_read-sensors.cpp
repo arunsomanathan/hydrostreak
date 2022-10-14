@@ -89,5 +89,19 @@ TEST(ReadSensorsTest, EmptySensorList) {     // NOLINT
   EXPECT_EQ(readSensors->getAllSensorReading().size(), 0) << "Size of Sensor reading map is incorrect "; // NOLINT
 }
 
+//  cppcheck-suppress [syntaxError,unmatchedSuppression]
+TEST(ReadSensorsTest, GetSensorReading) { // NOLINT
+
+  auto const mockSensor = std::unique_ptr<MockSensor>(new MockSensor(FIRST_SENSOR_TYPE, READ_PIN, POWER_PIN));
+  std::list<Sensors::Sensor *> sensors = {mockSensor.get()}; // NOLINT(cppcoreguidelines-init-variables)
+  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
+  EXPECT_CALL(*mockSensor.get(), readSensor()).Times(Exactly(1));
+  EXPECT_CALL(*mockSensor.get(), getType()).Times(Exactly(1)).WillOnce(Return(FIRST_SENSOR_TYPE));
+  EXPECT_CALL(*mockSensor.get(), getReading()).Times(1).WillOnce(Return(DEFAULT_READ_VALUE));
+  readSensors->readAllSensors();
+  EXPECT_EQ(readSensors->getSensorReading(FIRST_SENSOR_TYPE), DEFAULT_READ_VALUE)
+      << "Incorrect sensor reading"; // NOLINT
+}
+
 } // namespace
 #endif

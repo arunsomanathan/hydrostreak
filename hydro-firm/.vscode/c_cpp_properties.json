@@ -12,6 +12,11 @@
                 "/home/arun/project/techno-hydro-farm/hydro-firm/src",
                 "/home/arun/project/techno-hydro-farm/hydro-firm/lib/hydro-firm",
                 "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googlemock",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googletest",
+                "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googletest/include",
                 ""
             ],
             "browse": {
@@ -21,6 +26,11 @@
                     "/home/arun/project/techno-hydro-farm/hydro-firm/src",
                     "/home/arun/project/techno-hydro-farm/hydro-firm/lib/hydro-firm",
                     "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/ArduinoFake/src",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googlemock",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googlemock/include",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googletest",
+                    "/home/arun/project/techno-hydro-farm/hydro-firm/.pio/libdeps/native/googletest/googletest/include",
                     ""
                 ]
             },
@@ -29,6 +39,7 @@
                 "NATIVE",
                 ""
             ],
+            "cppStandard": "c++11",
             "compilerPath": "/usr/bin/gcc",
             "compilerArgs": [
                 ""

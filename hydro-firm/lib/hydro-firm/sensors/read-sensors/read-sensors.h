@@ -60,6 +60,11 @@ public:
    * Method for getting the sensor reading
    */
   virtual auto getAllSensorReading() const -> std::map<const std::string, int>;
+
+  /*
+   * Method for getting the reading of a specific sensor
+   */
+  virtual auto getSensorReading(const std::string &sensorName) -> int;
 };
 
 } // namespace Sensors

@@ -58,3 +58,10 @@ auto Sensors::ReadSensors::getAllSensorReading() const -> std::map<const std::st
   // Logger::notice("Sensors>Read-Sensors", "Get sensor reading values");
   return this->sensorReadings;
 }
+
+/*
+ * Method for getting the reading of a specific sensor
+ */
+auto Sensors::ReadSensors::getSensorReading(const std::string &sensorName) -> int {
+  return this->sensorReadings[sensorName];
+}
