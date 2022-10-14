@@ -40,8 +40,7 @@ class MockSensor : public Sensors::Sensor // NOLINT(cppcoreguidelines-avoid-non-
 {
 
 public:
-  // cppcheck-suppress [passedByValue,unmatchedSuppression]
-  MockSensor(const std::string sensorType, const uint8_t readPin, const uint8_t powerPin)
+  MockSensor(const std::string &sensorType, const uint8_t readPin, const uint8_t powerPin)
       : Sensors::Sensor(sensorType, Sensors::ANALOG, readPin, powerPin) {}
   MOCK_METHOD(void, readSensor, (), (override));
   MOCK_METHOD(void, initSensor, (), (override));
