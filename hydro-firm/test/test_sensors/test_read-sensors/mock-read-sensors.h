@@ -32,13 +32,14 @@
 #define TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
 
 #include "gmock/gmock.h"
-
 #include <sensors/read-sensors/read-sensors.h>
 
 class MockReadSensors : public Sensors::ReadSensors {
 public:
   explicit MockReadSensors(std::list<Sensors::Sensor *> &sensors) : Sensors::ReadSensors(sensors) {}
   MOCK_METHOD(void, readAllSensors, (), (override));
+  MOCK_METHOD((std::map<const std::string, int>), getAllSensorReading, (), (const, override));
+  MOCK_METHOD(int, getSensorReading, (const std::string &sensorName), (override));
 };
 
 #endif
