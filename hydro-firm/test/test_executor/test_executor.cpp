@@ -28,12 +28,12 @@
  * @since: 02-10-2022
  */
 
-#include "../test_data/test_process/mock-process.h"
-#include "../test_sensors/mock-sensors.h"
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
+#include "../test_data/test_process/mock-process.hpp"
+#include "../test_sensors/mock-sensors.hpp"
+#include "../test_sensors/test_read-sensors/mock-read-sensors.hpp"
+#include "../test_system/test_process/mock-process.hpp"
 #include <ArduinoFake.h>
-#include <executor/executor.h>
+#include <executor/executor.hpp>
 #include <gmock/gmock.h>
 #include <memory>
 

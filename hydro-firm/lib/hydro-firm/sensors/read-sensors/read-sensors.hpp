@@ -26,29 +26,46 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 09-09-2022
+ * @since: 08-09-2022
  */
 
-#ifndef SYSTEM_PROCESS_PROCESS_H
-#define SYSTEM_PROCESS_PROCESS_H
+#ifndef SENSORS_READ_SENSORS_READ_SENSORS_H
+#define SENSORS_READ_SENSORS_READ_SENSORS_H
 
-namespace System // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-{
+#include <list>
+#include <map>
+#include <sensors/sensor.hpp>
 
-class Process {
+namespace Sensors {
+
+class ReadSensors {
 
 private:
+  const std::list<Sensor *> sensors = {};
+  std::map<const std::string, int> sensorReadings = std::map<const std::string, int>();
+
 public:
   /*
    * Constructor
    */
-  explicit Process();
+  explicit ReadSensors(std::list<Sensors::Sensor *> &sensors);
+
   /*
-   * Run the system processes.
+   * Read all sensors.
    */
-  virtual auto run() const -> void;
+  virtual void readAllSensors();
+
+  /*
+   * Method for getting the sensor reading
+   */
+  virtual auto getAllSensorReading() const -> std::map<const std::string, int>;
+
+  /*
+   * Method for getting the reading of a specific sensor
+   */
+  virtual auto getSensorReading(const std::string &sensorName) -> int;
 };
 
-} // namespace System
+} // namespace Sensors
 
 #endif

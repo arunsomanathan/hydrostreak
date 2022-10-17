@@ -28,11 +28,11 @@
  * @since: 02-10-2022
  */
 
-#include "../mock-sensors.h"
+#include "../mock-sensors.hpp"
 #include <ArduinoFake.h>
 #include <gmock/gmock.h>
 #include <memory>
-#include <sensors/read-sensors/read-sensors.h>
+#include <sensors/read-sensors/read-sensors.hpp>
 
 #ifdef NATIVE
 namespace {

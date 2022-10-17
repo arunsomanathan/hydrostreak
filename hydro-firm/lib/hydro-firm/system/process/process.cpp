@@ -29,7 +29,7 @@
  * @since: 09-09-2022
  */
 
-#include <system/process/process.h>
+#include <system/process/process.hpp>
 
 /*
  * Constructor

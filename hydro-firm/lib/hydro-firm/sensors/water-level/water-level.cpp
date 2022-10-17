@@ -29,7 +29,7 @@
  * @since: 08-09-2022
  */
 
-#include <sensors/water-level/water-level.h>
+#include <sensors/water-level/water-level.hpp>
 
 namespace Sensors {
 /*

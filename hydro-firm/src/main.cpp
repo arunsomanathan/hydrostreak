@@ -28,15 +28,15 @@
  * @since: 03-09-2022
  */
 
-#include "executor/executor.h"
-#include <data/process/process.h>
+#include "executor/executor.hpp"
+#include <data/process/process.hpp>
 #include <list>
 #include <memory>
-#include <sensors/moisture-level/moisture-level.h>
-#include <sensors/read-sensors/read-sensors.h>
-#include <sensors/sensor.h>
-#include <sensors/water-level/water-level.h>
-#include <system/process/process.h>
+#include <sensors/moisture-level/moisture-level.hpp>
+#include <sensors/read-sensors/read-sensors.hpp>
+#include <sensors/sensor.hpp>
+#include <sensors/water-level/water-level.hpp>
+#include <system/process/process.hpp>
 
 #ifdef NATIVE
 #include <ArduinoFake.h>

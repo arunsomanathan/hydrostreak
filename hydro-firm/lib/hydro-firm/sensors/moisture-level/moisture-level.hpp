@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -26,30 +26,28 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 09-09-2022
+ * @since: 08-09-2022
  */
 
-#ifndef DATA_PROCESS_PROCESS_H
-#define DATA_PROCESS_PROCESS_H
+#ifndef SENSORS_MOISTURE_LEVEL_MOISTURE_LEVEL_H
+#define SENSORS_MOISTURE_LEVEL_MOISTURE_LEVEL_H
 
-#include <memory>
+#include <sensors/sensor.hpp>
 
-namespace Data // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-{
-class Process {
-private:
+namespace Sensors {
+
+static const std::string MOISTURE_LEVEL_SENSOR = "Moisture Level Sensor";
+static const SENSOR_TYPE MOISTURE_LEVEL_TYPE = ANALOG;
+
+class MoistureLevelSensor : public Sensors::Sensor {
+
 public:
   /*
-   * Constructor
+   * Constructor for Moisture Level Sensor
    */
-  explicit Process();
-
-  /*
-   * Process the system data
-   */
-  virtual auto run() const -> void;
+  explicit MoistureLevelSensor(uint8_t readPin, uint8_t powerPin);
 };
 
-} // namespace Data
+} // namespace Sensors
 
 #endif

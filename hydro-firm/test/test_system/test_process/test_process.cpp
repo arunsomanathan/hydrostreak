@@ -31,7 +31,7 @@
 #include <ArduinoFake.h>
 #include <gmock/gmock.h>
 #include <memory>
-#include <system/process/process.h>
+#include <system/process/process.hpp>
 
 #ifdef NATIVE
 namespace {

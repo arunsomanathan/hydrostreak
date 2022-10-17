@@ -29,9 +29,9 @@
  */
 
 #include "main.cpp" //NOLINT(bugprone-suspicious-include)
-#include "test_executor/mock-executor.h"
-#include "test_sensors/mock-sensors.h"
-#include "test_sensors/test_read-sensors/mock-read-sensors.h"
+#include "test_executor/mock-executor.hpp"
+#include "test_sensors/mock-sensors.hpp"
+#include "test_sensors/test_read-sensors/mock-read-sensors.hpp"
 #include <gmock/gmock.h>
 #include <memory>
 

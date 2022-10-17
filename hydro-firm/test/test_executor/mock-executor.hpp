@@ -28,16 +28,26 @@
  * @since: 02-10-2022
  */
 
-#ifndef TEST_DATA_TEST_PROCESS_TEST_PROCESS_H
-#define TEST_DATA_TEST_PROCESS_TEST_PROCESS_H
+#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
+#define TEST_EXECUTOR_MOCK_EXECUTOR_H
 
-#include "gmock/gmock.h"
+#include <gmock/gmock.h>
 
-#include <data/process/process.h>
+#include "../test_data/test_process/mock-process.hpp"
+#include "../test_sensors/test_read-sensors/mock-read-sensors.hpp"
+#include "../test_system/test_process/mock-process.hpp"
+#include <executor/executor.hpp>
 
-class MockDataProcess : public Data::Process {
+class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+{
 public:
-  MOCK_METHOD(void, run, (), (const, override));
+  // NOLINTNEXTLINE
+  MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess)
+      : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
+  // NOLINTNEXTLINE
+  MOCK_METHOD(void, setup, (), (const, override));
+  // NOLINTNEXTLINE
+  MOCK_METHOD(void, loop, (), (const, override));
 };
 
 #endif

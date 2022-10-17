@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,34 +20,26 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- *
  */
 
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 08-09-2022
+ * @since: 02-10-2022
  */
 
-#ifndef SENSORS_MOISTURE_LEVEL_MOISTURE_LEVEL_H
-#define SENSORS_MOISTURE_LEVEL_MOISTURE_LEVEL_H
+#ifndef TEST_SYSTEM_TEST_PROCESS_TEST_PROCESS_H
+#define TEST_SYSTEM_TEST_PROCESS_TEST_PROCESS_H
 
-#include <sensors/sensor.h>
+#include "gmock/gmock.h"
 
-namespace Sensors {
+#include <system/process/process.hpp>
 
-static const std::string MOISTURE_LEVEL_SENSOR = "Moisture Level Sensor";
-static const SENSOR_TYPE MOISTURE_LEVEL_TYPE = ANALOG;
-
-class MoistureLevelSensor : public Sensors::Sensor {
-
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+class MockSystemProcess : public System::Process {
 public:
-  /*
-   * Constructor for Moisture Level Sensor
-   */
-  explicit MoistureLevelSensor(const uint8_t readPin, const uint8_t powerPin);
+  // NOLINTNEXTLINE(modernize-use-trailing-return-type)
+  MOCK_METHOD(void, run, (), (const, override));
 };
-
-} // namespace Sensors
 
 #endif

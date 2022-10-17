@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,24 +20,34 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
 
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 09-09-2022
  */
 
-#ifndef TEST_SYSTEM_TEST_PROCESS_TEST_PROCESS_H
-#define TEST_SYSTEM_TEST_PROCESS_TEST_PROCESS_H
+#ifndef SYSTEM_PROCESS_PROCESS_H
+#define SYSTEM_PROCESS_PROCESS_H
 
-#include "gmock/gmock.h"
+namespace System {
 
-#include <system/process/process.h>
+class Process {
 
-class MockSystemProcess : public System::Process {
+private:
 public:
-  MOCK_METHOD(void, run, (), (const, override));
+  /*
+   * Constructor
+   */
+  explicit Process();
+  /*
+   * Run the system processes.
+   */
+  virtual auto run() const -> void;
 };
+
+} // namespace System
 
 #endif

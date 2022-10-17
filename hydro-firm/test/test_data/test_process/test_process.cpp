@@ -29,7 +29,7 @@
  */
 
 #include <ArduinoFake.h>
-#include <data/process/process.h>
+#include <data/process/process.hpp>
 #include <gmock/gmock.h>
 #include <memory>
 

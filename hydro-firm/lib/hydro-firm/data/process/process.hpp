@@ -10,8 +10,8 @@
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -26,28 +26,29 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 08-09-2022
+ * @since: 09-09-2022
  */
 
-#ifndef SENSORS_WATER_LEVEL_WATER_LEVEL_H
-#define SENSORS_WATER_LEVEL_WATER_LEVEL_H
+#ifndef DATA_PROCESS_PROCESS_H
+#define DATA_PROCESS_PROCESS_H
 
-#include <sensors/sensor.h>
+#include <memory>
 
-namespace Sensors {
-
-static const std::string WATER_LEVEL_SENSOR = "Water Level Sensor";
-static const SENSOR_TYPE WATER_LEVEL_TYPE = ANALOG;
-
-class WaterLevelSensor : public Sensors::Sensor {
-
+namespace Data {
+class Process {
+private:
 public:
   /*
-   * Constructor for Water Level Sensor
+   * Constructor
    */
-  explicit WaterLevelSensor(const uint8_t readPin, const uint8_t powerPin);
+  explicit Process();
+
+  /*
+   * Process the system data
+   */
+  virtual auto run() const -> void;
 };
 
-} // namespace Sensors
+} // namespace Data
 
 #endif
