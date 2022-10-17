@@ -28,8 +28,8 @@
  * @since: 11-10-2022
  */
 
-#ifndef TEST_SENSORS_TEST_SENSORS_H
-#define TEST_SENSORS_TEST_SENSORS_H
+#ifndef TEST_SENSORS_TEST_SENSORS_HPP
+#define TEST_SENSORS_TEST_SENSORS_HPP
 
 #include <gmock/gmock.h>
 #include <string>

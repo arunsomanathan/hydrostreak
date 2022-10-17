@@ -29,8 +29,8 @@
  * @since: 09-09-2022
  */
 
-#ifndef DATA_PROCESS_PROCESS_H
-#define DATA_PROCESS_PROCESS_H
+#ifndef DATA_PROCESS_PROCESS_HPP
+#define DATA_PROCESS_PROCESS_HPP
 
 #include <memory>
 

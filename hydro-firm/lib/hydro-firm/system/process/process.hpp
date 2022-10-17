@@ -29,8 +29,8 @@
  * @since: 09-09-2022
  */
 
-#ifndef SYSTEM_PROCESS_PROCESS_H
-#define SYSTEM_PROCESS_PROCESS_H
+#ifndef SYSTEM_PROCESS_PROCESS_HPP
+#define SYSTEM_PROCESS_PROCESS_HPP
 
 namespace System {
 
