@@ -28,8 +28,8 @@
  * @since: 02-10-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_HPP
+#define TEST_EXECUTOR_MOCK_EXECUTOR_HPP
 
 #include <gmock/gmock.h>
 

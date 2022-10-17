@@ -29,8 +29,8 @@
  * @since: 08-09-2022
  */
 
-#ifndef SENSORS_SENSOR_H
-#define SENSORS_SENSOR_H
+#ifndef SENSORS_SENSOR_HPP
+#define SENSORS_SENSOR_HPP
 
 #include <cstdint>
 #include <string>

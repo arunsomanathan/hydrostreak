@@ -29,8 +29,8 @@
  * @since: 09-09-2022
  */
 
-#ifndef SYSTEM_STATE_STATE_H
-#define SYSTEM_STATE_STATE_H
+#ifndef SYSTEM_STATE_STATE_HPP
+#define SYSTEM_STATE_STATE_HPP
 
 #include <sensors/read-sensors/read-sensors.hpp>
 
@@ -65,96 +65,96 @@ public:
    * Checks if the current water level is greater than or equal to maximum
    * allowed water level.
    */
-  auto isWaterLevelMax() -> bool;
+  virtual auto isWaterLevelMax() -> bool;
 
   /*
    * Checks if the current water level is less than or equal to minimum allowed
    * water level.
    */
-  auto isWaterLevelMin() -> bool;
+  virtual auto isWaterLevelMin() -> bool;
 
   /*
    * Checks if the current moisture level is less than or equal to minimum
    * allowed moisture level.
    */
-  auto isMoistureLevelMin() const -> bool;
+  virtual auto isMoistureLevelMin() const -> bool;
 
   /**
    * Checks if the system is in Cool down state. Cool Down state will be enabled
    * after completing watering cycle for a predefined period of time. During
    * this period a new watering cycle will not be started.
    */
-  auto isCoolDownState() const -> bool;
+  virtual auto isCoolDownState() const -> bool;
 
   /*
    * Checks if the system is in Active state. System moves to the active state
    * after completing the cool down period. In Active state system can start a
    * watering cycle provided all conditions are met.
    */
-  auto isActiveState() const -> bool;
+  virtual auto isActiveState() const -> bool;
 
   /*
    * Checks if the system is in Watering Cycle State. In Watering Cycle State
    * system will start moving water to plant containers and hold the water in
    * plant containers for a predefined amount of time.
    */
-  auto isWateringCycleState() const -> bool;
+  virtual auto isWateringCycleState() const -> bool;
 
   /**
    * Set the pump on or off state
    */
-  void setPumpOn(bool state);
+  virtual void setPumpOn(bool state);
 
   /*
    * Checks if the pump is working.
    */
-  auto isPumpOn() const -> bool;
+  virtual auto isPumpOn() const -> bool;
 
   /**
    * Set the valve on or off state
    */
-  void setValveClosed(bool state);
+  virtual void setValveClosed(bool state);
 
   /*
    * Checks if the valve is closed.
    */
-  auto isValveClosed() const -> bool;
+  virtual auto isValveClosed() const -> bool;
 
   /*
    * Set system state to Watering Cycling State. In this state pump will be on
    * and valve will be closed.
    */
-  void setWateringCycleState();
+  virtual void setWateringCycleState();
 
   /*
    * Reset system state from Watering Cycling State. In this state pump will be
    * off and valve will be open.
    */
-  void resetWateringCycleState();
+  virtual void resetWateringCycleState();
 
   /*
    * Set system state to Cool Down State. In this state pump should be off and
    * valve should be closed.
    */
-  void setCoolDownState();
+  virtual void setCoolDownState();
 
   /*
    * Reset system state from Cool Down State. In this state watering cycle can
    * be started. Here system transition into Active state.
    */
-  void resetCoolDownState();
+  virtual void resetCoolDownState();
 
   /*
    * Set system state to Active State. In this state watering cycle can be
    * started.
    */
-  void setActiveState();
+  virtual void setActiveState();
 
   /*
    * Reset system state from Active State. In this state watering cycle can be
    * started. Here system transition into Cool Down state.
    */
-  void resetActiveState();
+  virtual void resetActiveState();
 };
 } // namespace System
 

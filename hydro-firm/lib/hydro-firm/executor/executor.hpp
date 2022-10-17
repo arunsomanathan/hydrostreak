@@ -28,8 +28,8 @@
  * @since: 29-09-2022
  */
 
-#ifndef EXECUTOR_EXECUTOR_H
-#define EXECUTOR_EXECUTOR_H
+#ifndef EXECUTOR_EXECUTOR_HPP
+#define EXECUTOR_EXECUTOR_HPP
 
 #include <cstdint>
 #include <data/process/process.hpp>
