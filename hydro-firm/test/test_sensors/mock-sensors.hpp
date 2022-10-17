@@ -34,18 +34,24 @@
 #include <gmock/gmock.h>
 #include <string>
 
-#include <sensors/sensor.h>
+#include <sensors/sensor.hpp>
 
 class MockSensor : public Sensors::Sensor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 {
 
 public:
+  // NOLINTNEXTLINE
   MockSensor(const std::string &sensorType, const uint8_t readPin, const uint8_t powerPin)
       : Sensors::Sensor(sensorType, Sensors::ANALOG, readPin, powerPin) {}
+  // NOLINTNEXTLINE
   MOCK_METHOD(void, readSensor, (), (override));
+  // NOLINTNEXTLINE
   MOCK_METHOD(void, initSensor, (), (override));
+  // NOLINTNEXTLINE
   MOCK_METHOD(void, resetSensor, (), (override));
+  // NOLINTNEXTLINE
   MOCK_METHOD(int, getReading, (), (const, override));
+  // NOLINTNEXTLINE
   MOCK_METHOD(std::string, getType, (), (override));
 };
 

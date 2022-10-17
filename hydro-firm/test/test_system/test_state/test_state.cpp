@@ -28,11 +28,11 @@
  * @since: 14-10-2022
  */
 
-#include "../../test_sensors/test_read-sensors/mock-read-sensors.h"
+#include "../../test_sensors/test_read-sensors/mock-read-sensors.hpp"
 #include <gmock/gmock.h>
-#include <sensors/moisture-level/moisture-level.h>
-#include <sensors/water-level/water-level.h>
-#include <system/state/state.h>
+#include <sensors/moisture-level/moisture-level.hpp>
+#include <sensors/water-level/water-level.hpp>
+#include <system/state/state.hpp>
 #include <tuple>
 
 #ifdef NATIVE

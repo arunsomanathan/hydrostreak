@@ -29,7 +29,7 @@
  * @since: 03-09-2022
  */
 
-#include "sensors/read-sensors/read-sensors.h"
+#include "sensors/read-sensors/read-sensors.hpp"
 #include <cstdint>
 #include <iostream>
 #include <list>

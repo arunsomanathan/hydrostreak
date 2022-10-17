@@ -30,7 +30,7 @@
 
 #include <ArduinoFake.h>
 #include <gtest/gtest.h>
-#include <sensors/moisture-level/moisture-level.h>
+#include <sensors/moisture-level/moisture-level.hpp>
 
 #ifdef NATIVE
 

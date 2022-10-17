@@ -29,7 +29,7 @@
  * @since: 08-09-2022
  */
 
-#include <sensors/moisture-level/moisture-level.h>
+#include <sensors/moisture-level/moisture-level.hpp>
 
 namespace Sensors {
 /*

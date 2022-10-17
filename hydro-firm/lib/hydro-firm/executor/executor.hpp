@@ -25,26 +25,54 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 29-09-2022
  */
 
-#ifndef TEST_EXECUTOR_MOCK_EXECUTOR_H
-#define TEST_EXECUTOR_MOCK_EXECUTOR_H
+#ifndef EXECUTOR_EXECUTOR_H
+#define EXECUTOR_EXECUTOR_H
 
-#include <gmock/gmock.h>
+#include <cstdint>
+#include <data/process/process.hpp>
+#include <sensors/read-sensors/read-sensors.hpp>
+#include <system/process/process.hpp>
 
-#include "../test_data/test_process/mock-process.h"
-#include "../test_sensors/test_read-sensors/mock-read-sensors.h"
-#include "../test_system/test_process/mock-process.h"
-#include <executor/executor.h>
+namespace MainExecutor {
 
-class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-{
+const uint32_t BAUD_RATE = 115200;
+
+// Delay in executing system loop
+const uint32_t DELAY = 1000; // In milliseconds
+
+// const uint8_t ARDUINO_UNO = 0;
+const uint8_t NODE_MCU = 1;
+
+// Type of device
+const uint8_t DEVICE_TYPE = NODE_MCU;
+
+// Logging enabled
+const bool LOGGING_ENABLED = true;
+
+class Executor {
+
+private:
+  Sensors::ReadSensors *readSensors = nullptr;
+  System::Process *systemProcess = nullptr;
+  Data::Process *dataProcess = nullptr;
+
 public:
-  MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess)
-      : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
-  MOCK_METHOD(void, setup, (), (const, override));
-  MOCK_METHOD(void, loop, (), (const, override));
+  explicit Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess);
+
+  /*
+   * Runner the Setup
+   */
+  virtual void setup() const;
+
+  /*
+   * Runner the Loop
+   */
+  virtual void loop() const;
 };
+
+} // namespace MainExecutor
 
 #endif

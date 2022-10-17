@@ -29,9 +29,9 @@
  * @since: 09-09-2022
  */
 
-#include <sensors/moisture-level/moisture-level.h>
-#include <sensors/water-level/water-level.h>
-#include <system/state/state.h>
+#include <sensors/moisture-level/moisture-level.hpp>
+#include <sensors/water-level/water-level.hpp>
+#include <system/state/state.hpp>
 
 /*
  * Constructor

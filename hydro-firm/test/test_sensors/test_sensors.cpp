@@ -31,7 +31,7 @@
 #include <ArduinoFake.h>
 #include <gtest/gtest.h>
 #include <memory>
-#include <sensors/sensor.h>
+#include <sensors/sensor.hpp>
 #include <string>
 
 #ifdef NATIVE

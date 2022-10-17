@@ -35,15 +35,14 @@
 #include <cstdint>
 #include <string>
 
-namespace Sensors // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-{
+namespace Sensors {
 
-enum SENSOR_TYPE { ANALOG = true, DIGITAL = false };
+enum SENSOR_TYPE { ANALOG, DIGITAL };
 
 class Sensor {
 
 private:
-  static const short DEFAULT_DELAY = 10;
+  static const int16_t DEFAULT_DELAY = 10;
 
   // Sensor type
   const std::string type;
@@ -124,13 +123,12 @@ protected:
   /*
    * Protected constructor for Sensors
    */
-  explicit Sensor(const std::string &type, const SENSOR_TYPE isAnalogOrDigital, const uint8_t readPin,
-                  const uint8_t powerPin);
+  explicit Sensor(const std::string &type, SENSOR_TYPE isAnalogOrDigital, uint8_t readPin, uint8_t powerPin);
 
   /*
    * Protected constructor for Sensors without power on & off functionality
    */
-  explicit Sensor(const std::string &type, const SENSOR_TYPE isAnalogOrDigital, const uint8_t readPin);
+  explicit Sensor(const std::string &type, SENSOR_TYPE isAnalogOrDigital, uint8_t readPin);
 };
 } // namespace Sensors
 

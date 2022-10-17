@@ -29,42 +29,23 @@
  * @since: 08-09-2022
  */
 
-#ifndef SENSORS_READ_SENSORS_READ_SENSORS_H
-#define SENSORS_READ_SENSORS_READ_SENSORS_H
+#ifndef SENSORS_WATER_LEVEL_WATER_LEVEL_H
+#define SENSORS_WATER_LEVEL_WATER_LEVEL_H
 
-#include <list>
-#include <map>
-#include <sensors/sensor.h>
+#include <sensors/sensor.hpp>
 
-namespace Sensors // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-{
+namespace Sensors {
 
-class ReadSensors {
+static const std::string WATER_LEVEL_SENSOR = "Water Level Sensor";
+static const SENSOR_TYPE WATER_LEVEL_TYPE = ANALOG;
 
-private:
-  const std::list<Sensor *> sensors = {};
-  std::map<const std::string, int> sensorReadings = std::map<const std::string, int>();
+class WaterLevelSensor : public Sensors::Sensor {
 
 public:
   /*
-   * Constructor
+   * Constructor for Water Level Sensor
    */
-  explicit ReadSensors(std::list<Sensors::Sensor *> &sensors);
-
-  /*
-   * Read all sensors.
-   */
-  virtual void readAllSensors();
-
-  /*
-   * Method for getting the sensor reading
-   */
-  virtual auto getAllSensorReading() const -> std::map<const std::string, int>;
-
-  /*
-   * Method for getting the reading of a specific sensor
-   */
-  virtual auto getSensorReading(const std::string &sensorName) -> int;
+  explicit WaterLevelSensor(uint8_t readPin, uint8_t powerPin);
 };
 
 } // namespace Sensors

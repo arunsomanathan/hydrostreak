@@ -25,21 +25,21 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 01-10-2022
+ * @since: 02-10-2022
  */
 
-#ifndef TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
-#define TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
+#ifndef TEST_DATA_TEST_PROCESS_TEST_PROCESS_H
+#define TEST_DATA_TEST_PROCESS_TEST_PROCESS_H
 
 #include "gmock/gmock.h"
-#include <sensors/read-sensors/read-sensors.h>
 
-class MockReadSensors : public Sensors::ReadSensors {
+#include <data/process/process.hpp>
+
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+class MockDataProcess : public Data::Process {
 public:
-  explicit MockReadSensors(std::list<Sensors::Sensor *> &sensors) : Sensors::ReadSensors(sensors) {}
-  MOCK_METHOD(void, readAllSensors, (), (override));
-  MOCK_METHOD((std::map<const std::string, int>), getAllSensorReading, (), (const, override));
-  MOCK_METHOD(int, getSensorReading, (const std::string &sensorName), (override));
+  // NOLINTNEXTLINE
+  MOCK_METHOD(void, run, (), (const, override));
 };
 
 #endif

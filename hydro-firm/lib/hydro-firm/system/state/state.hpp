@@ -32,19 +32,19 @@
 #ifndef SYSTEM_STATE_STATE_H
 #define SYSTEM_STATE_STATE_H
 
-#include <sensors/read-sensors/read-sensors.h>
+#include <sensors/read-sensors/read-sensors.hpp>
 
 namespace System {
 
 // TODO(aruncs009@gmail.com) Add options to override these values
 // Maximum allowed water level
-const short WATER_LEVEL_MAX_ALLOWED = 10;
+const int16_t WATER_LEVEL_MAX_ALLOWED = 10;
 
 // Maximum allowed water level
-const short WATER_LEVEL_MIN_ALLOWED = 0;
+const int16_t WATER_LEVEL_MIN_ALLOWED = 0;
 
 // Minimum allowed moisture level
-const short MOISTURE_LEVEL_MIN_ALLOWED = 10;
+const int16_t MOISTURE_LEVEL_MIN_ALLOWED = 10;
 
 class State {
 private:
@@ -103,7 +103,7 @@ public:
   /**
    * Set the pump on or off state
    */
-  void setPumpOn(const bool state);
+  void setPumpOn(bool state);
 
   /*
    * Checks if the pump is working.
@@ -113,7 +113,7 @@ public:
   /**
    * Set the valve on or off state
    */
-  void setValveClosed(const bool state);
+  void setValveClosed(bool state);
 
   /*
    * Checks if the valve is closed.

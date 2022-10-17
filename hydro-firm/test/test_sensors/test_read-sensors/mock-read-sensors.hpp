@@ -25,55 +25,25 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 29-09-2022
+ * @since: 01-10-2022
  */
 
-#ifndef EXECUTOR_EXECUTOR_H
-#define EXECUTOR_EXECUTOR_H
+#ifndef TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
+#define TEST_SENSORS_TEST_READ_SENSORS_TEST_READ_SENSORS_H
 
-#include <cstdint>
-#include <data/process/process.h>
-#include <sensors/read-sensors/read-sensors.h>
-#include <system/process/process.h>
+#include "gmock/gmock.h"
+#include <sensors/read-sensors/read-sensors.hpp>
 
-namespace MainExecutor // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-{
-
-const uint32_t BAUD_RATE = 115200;
-
-// Delay in executing system loop
-const uint32_t DELAY = 1000; // In milliseconds
-
-// const uint8_t ARDUINO_UNO = 0;
-const uint8_t NODE_MCU = 1;
-
-// Type of device
-const uint8_t DEVICE_TYPE = NODE_MCU;
-
-// Logging enabled
-const bool LOGGING_ENABLED = true;
-
-class Executor {
-
-private:
-  Sensors::ReadSensors *readSensors = nullptr;
-  System::Process *systemProcess = nullptr;
-  Data::Process *dataProcess = nullptr;
-
+class MockReadSensors : public Sensors::ReadSensors {
 public:
-  explicit Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess);
-
-  /*
-   * Runner the Setup
-   */
-  virtual void setup() const;
-
-  /*
-   * Runner the Loop
-   */
-  virtual void loop() const;
+  // NOLINTNEXTLINE
+  explicit MockReadSensors(std::list<Sensors::Sensor *> &sensors) : Sensors::ReadSensors(sensors) {}
+  // NOLINTNEXTLINE
+  MOCK_METHOD(void, readAllSensors, (), (override));
+  // NOLINTNEXTLINE
+  MOCK_METHOD((std::map<const std::string, int>), getAllSensorReading, (), (const, override));
+  // NOLINTNEXTLINE
+  MOCK_METHOD(int, getSensorReading, (const std::string &sensorName), (override));
 };
-
-} // namespace MainExecutor
 
 #endif

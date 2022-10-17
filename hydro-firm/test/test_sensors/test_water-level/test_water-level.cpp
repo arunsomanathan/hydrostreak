@@ -30,7 +30,7 @@
 
 #include <ArduinoFake.h>
 #include <gtest/gtest.h>
-#include <sensors/water-level/water-level.h>
+#include <sensors/water-level/water-level.hpp>
 
 #ifdef NATIVE
 

@@ -29,7 +29,7 @@
  * @since: 08-09-2022
  */
 
-#include <sensors/sensor.h>
+#include <sensors/sensor.hpp>
 
 #ifdef NATIVE
 #include <ArduinoFake.h>
