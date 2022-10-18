@@ -28,16 +28,155 @@
  * @since: 02-10-2022
  */
 
-#include <ArduinoFake.h>
+#include "../../test_sensors/test_read-sensors/mock-read-sensors.hpp"
+#include "../test_controller/mock-controller.hpp"
+#include "../test_state/mock-state.hpp"
+
 #include <gmock/gmock.h>
-#include <memory>
 #include <system/process/process.hpp>
 
 #ifdef NATIVE
 namespace {
-TEST(SystemProcessTest, IsRunWorking) { // NOLINT
-  auto process = std::unique_ptr<System::Process>(new System::Process());
-  process->run();
+
+using ::testing::Exactly;
+using ::testing::Return;
+using ::testing::StrictMock;
+
+TEST(SystemProcessTest, InCoolDownStateAndWaterLevelMin) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {};               // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMin()).WillOnce(Return(true));
+  EXPECT_CALL(mockController, closeValve()).Times(Exactly(1));
+  process.run();
 }
+
+// cppcheck-suppress [syntaxError,unmatchedSuppression]
+TEST(SystemProcessTest, InCoolDownStateAndWaterLevelNotMin) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {};                  // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMin()).WillOnce(Return(false));
+  EXPECT_CALL(mockController, turnOffPump()).Times(Exactly(1));
+  EXPECT_CALL(mockController, openValve()).Times(Exactly(1));
+  EXPECT_CALL(mockState, resetWateringCycleState()).Times(Exactly(1));
+  EXPECT_CALL(mockState, setCoolDownState()).Times(Exactly(1));
+  process.run();
+}
+
+TEST(SystemProcessTest, InActiveStateAndWaterLevelMax) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {};             // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(true));
+  EXPECT_CALL(mockController, turnOffPump()).Times(Exactly(1));
+  EXPECT_CALL(mockController, openValve()).Times(Exactly(1));
+  EXPECT_CALL(mockState, resetWateringCycleState()).Times(Exactly(1));
+  EXPECT_CALL(mockState, setCoolDownState()).Times(Exactly(1));
+  process.run();
+}
+
+TEST(SystemProcessTest, InActiveStateAndWaterLevelNotMaxAndNotMinAndNotInWateringCycleState) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWaterLevelMin()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWateringCycleState()).WillOnce(Return(false));
+  EXPECT_CALL(mockController, closeValve()).Times(Exactly(1));
+  process.run();
+}
+
+TEST(SystemProcessTest, InActiveStateAndWaterLevelNotMaxAndNotMinAndInWateringCycleState) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWaterLevelMin()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWateringCycleState()).WillOnce(Return(true));
+  process.run();
+}
+
+TEST(SystemProcessTest, InActiveStateAndWaterLevelMinAndMositureLevelNotMin) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWaterLevelMin()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isMoistureLevelMin()).WillOnce(Return(false));
+  EXPECT_CALL(mockController, closeValve()).Times(Exactly(1));
+  process.run();
+}
+
+TEST(SystemProcessTest, InActiveStateAndWaterLevelMinAndMositureLevelMin) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {};                                // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWaterLevelMin()).WillOnce(Return(true));
+  EXPECT_CALL(mockState, isMoistureLevelMin()).WillOnce(Return(true));
+  EXPECT_CALL(mockController, closeValve()).Times(Exactly(1));
+  EXPECT_CALL(mockController, turnOnPump()).Times(Exactly(1));
+  EXPECT_CALL(mockState, setWateringCycleState()).Times(Exactly(1));
+  process.run();
+}
+
+TEST(SystemProcessTest, NotActiveStateAndNotCoolDownStateAndWaterLevelMax) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {};                                 // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(true));
+  EXPECT_CALL(mockController, turnOffPump()).Times(Exactly(1));
+  EXPECT_CALL(mockController, openValve()).Times(Exactly(1));
+  EXPECT_CALL(mockState, resetWateringCycleState()).Times(Exactly(1));
+  EXPECT_CALL(mockState, setCoolDownState()).Times(Exactly(1));
+  process.run();
+}
+
+TEST(SystemProcessTest, NotActiveStateAndNotCoolDownStateAndWaterLevelNotMax) { // NOLINT
+  std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
+  StrictMock<MockReadSensors> mockReadSensors(sensors);
+  StrictMock<MockSystemState> mockState(mockReadSensors);
+  StrictMock<MockSystemController> mockController(mockState);
+  System::Process process(mockController, mockState); // NOLINT
+  EXPECT_CALL(mockState, isCoolDownState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isActiveState()).WillOnce(Return(false));
+  EXPECT_CALL(mockState, isWaterLevelMax()).WillOnce(Return(false));
+  EXPECT_CALL(mockController, turnOnPump()).Times(Exactly(1));
+  EXPECT_CALL(mockController, closeValve()).Times(Exactly(1));
+  EXPECT_CALL(mockState, setWateringCycleState()).Times(Exactly(1));
+  process.run();
+}
+
 } // namespace
 #endif

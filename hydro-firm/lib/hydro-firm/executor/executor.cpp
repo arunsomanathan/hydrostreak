@@ -43,14 +43,9 @@
 /*
  * Constructor
  */
-MainExecutor::Executor::Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess,
-                                 Data::Process *dataProcess)
-    : readSensors(readSensors), systemProcess(systemProcess), dataProcess(dataProcess) {
-  // If the dependency was not defined, throw an exception.
-  if (readSensors == nullptr || systemProcess == nullptr || dataProcess == nullptr) {
-    throw std::invalid_argument("readSensors, systemProcess and dataProcess must not be null"); // LCOV_EXCL_BR_LINE
-  }
-}
+MainExecutor::Executor::Executor(Sensors::ReadSensors &readSensors, System::Process &systemProcess,
+                                 Data::Process &dataProcess)
+    : readSensors(&readSensors), systemProcess(&systemProcess), dataProcess(&dataProcess) {}
 
 /**
  * Runner the setup

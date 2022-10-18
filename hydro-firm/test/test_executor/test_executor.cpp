@@ -31,7 +31,9 @@
 #include "../test_data/test_process/mock-process.hpp"
 #include "../test_sensors/mock-sensors.hpp"
 #include "../test_sensors/test_read-sensors/mock-read-sensors.hpp"
+#include "../test_system/test_controller/mock-controller.hpp"
 #include "../test_system/test_process/mock-process.hpp"
+#include "../test_system/test_state/mock-state.hpp"
 #include <ArduinoFake.h>
 #include <executor/executor.hpp>
 #include <gmock/gmock.h>
@@ -46,58 +48,32 @@ using ::testing::Exactly;
 TEST(ExecutorTest, IsLoopWorking) {          // NOLINT
   std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
   When(Method(ArduinoFake(), delay)).AlwaysReturn();
-  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors(sensors));
-  auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
-  auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
-  auto executor = new MainExecutor::Executor(mockReadSensors.get(), mockSystemProcess.get(), mockDataProcess.get());
-  EXPECT_CALL(*mockReadSensors.get(), readAllSensors()).Times(Exactly(1));
-  EXPECT_CALL(*mockSystemProcess.get(), run()).Times(Exactly(1));
-  executor->loop();
+  MockReadSensors mockReadSensors(sensors);
+  MockSystemState mockState(mockReadSensors);
+  MockSystemController mockController(mockState);
+  MockSystemProcess mockSystemProcess(mockController, mockState);
+  MockDataProcess mockDataProcess;
+  MainExecutor::Executor executor(mockReadSensors, mockSystemProcess, mockDataProcess);
+  EXPECT_CALL(mockReadSensors, readAllSensors()).Times(Exactly(1));
+  EXPECT_CALL(mockSystemProcess, run()).Times(Exactly(1));
+  executor.loop();
   Verify(Method(ArduinoFake(), delay).Using(MainExecutor::DELAY)).Once();
 }
 
 TEST(ExecutorTest, IsSetupWorking) {         // NOLINT
   std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
   When(OverloadedMethod(ArduinoFake(Serial), begin, void(unsigned long))).AlwaysReturn();
-  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors(sensors));
-  auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
-  auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
-  auto executor = new MainExecutor::Executor(mockReadSensors.get(), mockSystemProcess.get(), mockDataProcess.get());
-  EXPECT_CALL(*mockReadSensors.get(), readAllSensors()).Times(Exactly(0));
-  EXPECT_CALL(*mockSystemProcess.get(), run()).Times(Exactly(0));
-  executor->setup();
+  MockReadSensors mockReadSensors(sensors);
+  MockSystemState mockState(mockReadSensors);
+  MockSystemController mockController(mockState);
+  MockSystemProcess mockSystemProcess(mockController, mockState);
+  MockDataProcess mockDataProcess;
+  MainExecutor::Executor executor(mockReadSensors, mockSystemProcess, mockDataProcess);
+  EXPECT_CALL(mockReadSensors, readAllSensors()).Times(Exactly(0));
+  EXPECT_CALL(mockSystemProcess, run()).Times(Exactly(0));
+  executor.setup();
   Verify(OverloadedMethod(ArduinoFake(Serial), begin, void(unsigned long)).Using(MainExecutor::BAUD_RATE)).Once();
 }
 
-TEST(ExecutorTest, ExceptionOnNullReadSensor) { // NOLINT
-  auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
-  auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
-  // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-  EXPECT_THROW(new MainExecutor::Executor(nullptr, mockSystemProcess.get(), mockDataProcess.get()),
-               std::invalid_argument);
-}
-
-TEST(ExecutorTest, ExceptionOnNullSystemProcess) { // NOLINT
-  std::list<Sensors::Sensor *> sensors = {};       // NOLINT(cppcoreguidelines-init-variables)
-  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors(sensors));
-  auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
-  // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-  EXPECT_THROW(new MainExecutor::Executor(mockReadSensors.get(), nullptr, mockDataProcess.get()),
-               std::invalid_argument);
-}
-
-TEST(ExecutorTest, ExceptionOnNullDataProcess) { // NOLINT
-  std::list<Sensors::Sensor *> sensors = {};     // NOLINT(cppcoreguidelines-init-variables)
-  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors(sensors));
-  auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
-  // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-  EXPECT_THROW(new MainExecutor::Executor(mockReadSensors.get(), mockSystemProcess.get(), nullptr),
-               std::invalid_argument);
-}
-
-TEST(ExecutorTest, ExceptionOnNullReadSensorAndSystemProcess) { // NOLINT
-  // NOLINTNEXTLINE(cppcoreguidelines-avoid-goto,hicpp-avoid-goto)
-  EXPECT_THROW(new MainExecutor::Executor(nullptr, nullptr, nullptr), std::invalid_argument);
-}
 } // namespace
 #endif

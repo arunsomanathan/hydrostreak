@@ -49,22 +49,22 @@ public:
   /*
    * Turn On Pump.
    */
-  void turnOnPump();
+  virtual void turnOnPump();
 
   /*
    * Turn Off Pump.
    */
-  void turnOffPump();
+  virtual void turnOffPump();
 
   /*
    * Close Valve.
    */
-  void closeValve();
+  virtual void closeValve();
 
   /*
    * Open valve.
    */
-  void openValve();
+  virtual void openValve();
 };
 
 } // namespace System

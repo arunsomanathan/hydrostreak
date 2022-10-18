@@ -42,7 +42,7 @@ class MockExecutor : public MainExecutor::Executor // NOLINT(cppcoreguidelines-a
 {
 public:
   // NOLINTNEXTLINE
-  MockExecutor(MockReadSensors *mockReadSensors, MockSystemProcess *mockSystemProcess, MockDataProcess *mockDataProcess)
+  MockExecutor(MockReadSensors &mockReadSensors, MockSystemProcess &mockSystemProcess, MockDataProcess &mockDataProcess)
       : MainExecutor::Executor(mockReadSensors, mockSystemProcess, mockDataProcess) {}
   // NOLINTNEXTLINE
   MOCK_METHOD(void, setup, (), (const, override));
