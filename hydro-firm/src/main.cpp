@@ -52,11 +52,11 @@ std::unique_ptr<MainExecutor::Executor> executor = nullptr; // NOLINT
 #if defined NATIVE
 const auto LOOP_COUNT = 10;
 
-void run(MainExecutor::Executor const *executor, const int loopCount) {
+void run(MainExecutor::Executor const &executor, const int loopCount) {
   // TODO(aruncs009@gmail.com): Add logging
-  executor->setup();
+  executor.setup();
   for (int i = 1; i <= loopCount; ++i) {
-    executor->loop();
+    executor.loop();
   }
 }
 #elif !UNIT_TEST
@@ -66,15 +66,17 @@ void run(MainExecutor::Executor const *executor, const int loopCount) {
  */
 void setup() {
   // TODO(aruncs009@gmail.com): Add logging
-  auto moistureLevelSensor = std::unique_ptr<Sensors::MoistureLevelSensor>(new Sensors::MoistureLevelSensor(1, 1));
-  auto waterLevelSensor = std::unique_ptr<Sensors::WaterLevelSensor>(new Sensors::WaterLevelSensor(1, 1));
+  Sensors::MoistureLevelSensor moistureLevelSensor(1, 1);
+  Sensors::WaterLevelSensor waterLevelSensor(1, 1);
   // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-  std::list<Sensors::Sensor *> sensors = {moistureLevelSensor.get(), waterLevelSensor.get()};
-  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
-  auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
-  auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
-  executor = std::unique_ptr<MainExecutor::Executor>(
-      new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
+  std::list<Sensors::Sensor *> sensors = {&moistureLevelSensor, &waterLevelSensor};
+  Sensors::ReadSensors readSensors(sensors);
+  System::State state(readSensors);
+  System::Controller controller(state);
+  System::Process systemProcess(controller, state);
+  Data::Process dataProcess;
+  executor =
+      std::unique_ptr<MainExecutor::Executor>(new MainExecutor::Executor(readSensors, systemProcess, dataProcess));
   executor->setup();
 }
 
@@ -100,16 +102,18 @@ void configureArduinoFake() {
 auto main() -> int {
   configureArduinoFake();
   // TODO(aruncs009@gmail.com): Add logging
-  auto moistureLevelSensor = std::unique_ptr<Sensors::MoistureLevelSensor>(new Sensors::MoistureLevelSensor(1, 1));
-  auto waterLevelSensor = std::unique_ptr<Sensors::WaterLevelSensor>(new Sensors::WaterLevelSensor(1, 1));
+  Sensors::MoistureLevelSensor moistureLevelSensor(1, 1);
+  Sensors::WaterLevelSensor waterLevelSensor(1, 1);
   // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-  std::list<Sensors::Sensor *> sensors = {moistureLevelSensor.get(), waterLevelSensor.get()};
-  auto readSensors = std::unique_ptr<Sensors::ReadSensors>(new Sensors::ReadSensors(sensors));
-  auto systemProcess = std::unique_ptr<System::Process>(new System::Process());
-  auto dataProcess = std::unique_ptr<Data::Process>(new Data::Process());
-  auto executor = std::unique_ptr<MainExecutor::Executor>(
-      new MainExecutor::Executor(readSensors.get(), systemProcess.get(), dataProcess.get()));
-  run(executor.get(), LOOP_COUNT);
+  std::list<Sensors::Sensor *> sensors = {&moistureLevelSensor, &waterLevelSensor};
+  Sensors::ReadSensors readSensors(sensors);
+
+  System::State state(readSensors);
+  System::Controller controller(state);
+  System::Process systemProcess(controller, state);
+  Data::Process dataProcess;
+  MainExecutor::Executor executor(readSensors, systemProcess, dataProcess);
+  run(executor, LOOP_COUNT);
   return 0;
 }
 

@@ -55,12 +55,12 @@ const bool LOGGING_ENABLED = true;
 class Executor {
 
 private:
-  Sensors::ReadSensors *readSensors = nullptr;
-  System::Process *systemProcess = nullptr;
-  Data::Process *dataProcess = nullptr;
+  Sensors::ReadSensors *readSensors;
+  System::Process *systemProcess;
+  Data::Process *dataProcess;
 
 public:
-  explicit Executor(Sensors::ReadSensors *readSensors, System::Process *systemProcess, Data::Process *dataProcess);
+  explicit Executor(Sensors::ReadSensors &readSensors, System::Process &systemProcess, Data::Process &dataProcess);
 
   /*
    * Runner the Setup

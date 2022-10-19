@@ -29,9 +29,12 @@
  */
 
 #include "main.cpp" //NOLINT(bugprone-suspicious-include)
+#include "test_data/test_process/mock-process.hpp"
 #include "test_executor/mock-executor.hpp"
 #include "test_sensors/mock-sensors.hpp"
 #include "test_sensors/test_read-sensors/mock-read-sensors.hpp"
+#include "test_system/test_controller/mock-controller.hpp"
+#include "test_system/test_state/mock-state.hpp"
 #include <gmock/gmock.h>
 #include <memory>
 
@@ -66,14 +69,15 @@ using ::testing::Exactly;
 
 TEST(MainTest, TestLoopAndSetup) {           // NOLINT
   std::list<Sensors::Sensor *> sensors = {}; // NOLINT(cppcoreguidelines-init-variables)
-  auto const mockReadSensors = std::unique_ptr<MockReadSensors>(new MockReadSensors(sensors));
-  auto const mockSystemProcess = std::unique_ptr<MockSystemProcess>(new MockSystemProcess());
-  auto const mockDataProcess = std::unique_ptr<MockDataProcess>(new MockDataProcess());
-  auto const executor = std::unique_ptr<MockExecutor>(
-      new MockExecutor(mockReadSensors.get(), mockSystemProcess.get(), mockDataProcess.get()));
-  EXPECT_CALL(*executor.get(), loop()).Times(Exactly(1));
-  EXPECT_CALL(*executor.get(), setup()).Times(Exactly(1));
-  run(executor.get(), 1);
+  MockReadSensors mockReadSensors(sensors);
+  MockSystemState mockState(mockReadSensors);
+  MockSystemController mockController(mockState);
+  MockSystemProcess mockSystemProcess(mockController, mockState);
+  MockDataProcess mockDataProcess;
+  MockExecutor executor(mockReadSensors, mockSystemProcess, mockDataProcess);
+  EXPECT_CALL(executor, loop()).Times(Exactly(1));
+  EXPECT_CALL(executor, setup()).Times(Exactly(1));
+  run(executor, 1);
 }
 
 auto main(int argc, char **argv) -> int {

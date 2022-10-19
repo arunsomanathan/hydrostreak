@@ -25,23 +25,29 @@
 /*
  * @author: Arun C S
  * @email: aruncs009@gmail.com
- * @since: 02-10-2022
+ * @since: 17-10-2022
  */
 
-#ifndef TEST_SYSTEM_TEST_PROCESS_TEST_PROCESS_HPP
-#define TEST_SYSTEM_TEST_PROCESS_TEST_PROCESS_HPP
+#ifndef TEST_SYSTEM_TEST_CONTROLLER_TEST_CONTROLLER_HPP
+#define TEST_SYSTEM_TEST_CONTROLLER_TEST_CONTROLLER_HPP
 
 #include "gmock/gmock.h"
 
-#include <system/process/process.hpp>
+#include <system/controller/controller.hpp>
 
-class MockSystemProcess : public System::Process {
+// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+class MockSystemController : public System::Controller {
 public:
   // NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
-  explicit MockSystemProcess(System::Controller &controller, System::State &state)
-      : System::Process(controller, state) {}
+  explicit MockSystemController(System::State &state) : System::Controller(state){};
   // NOLINTNEXTLINE(modernize-use-trailing-return-type)
-  MOCK_METHOD(void, run, (), (override));
+  MOCK_METHOD(void, turnOnPump, (), (override));
+  // NOLINTNEXTLINE(modernize-use-trailing-return-type)
+  MOCK_METHOD(void, turnOffPump, (), (override));
+  // NOLINTNEXTLINE(modernize-use-trailing-return-type)
+  MOCK_METHOD(void, closeValve, (), (override));
+  // NOLINTNEXTLINE(modernize-use-trailing-return-type)
+  MOCK_METHOD(void, openValve, (), (override));
 };
 
 #endif

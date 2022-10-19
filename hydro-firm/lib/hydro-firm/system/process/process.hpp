@@ -32,20 +32,53 @@
 #ifndef SYSTEM_PROCESS_PROCESS_HPP
 #define SYSTEM_PROCESS_PROCESS_HPP
 
+#include <system/controller/controller.hpp>
+#include <system/state/state.hpp>
+
 namespace System {
 
 class Process {
 
 private:
+  State *state;
+  Controller *controller;
+
+  /*
+   * Handle Cool down state of the system..
+   */
+  void handleCoolDownState();
+
+  /*
+   * Handle Active state of the system.
+   */
+  void handleActiveState();
+
+  /*
+   * Handle Force watering cycle state of the system.
+   */
+  void forceWateringCycle();
+
+  /*
+   * Drain water from the Plant Container and set system to cool down state.
+   * Also resets the watering cycle state.
+   */
+  void drainWater();
+
+  /*
+   * Fill water to the Plant Container and set system to watering cycle state.
+   */
+  void fillWater();
+
 public:
   /*
    * Constructor
    */
-  explicit Process();
+  explicit Process(System::Controller &controller, System::State &state);
+
   /*
    * Run the system processes.
    */
-  virtual auto run() const -> void;
+  virtual auto run() -> void;
 };
 
 } // namespace System

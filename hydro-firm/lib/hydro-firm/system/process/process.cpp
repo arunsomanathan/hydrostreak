@@ -34,9 +34,81 @@
 /*
  * Constructor
  */
-System::Process::Process() = default;
+System::Process::Process(System::Controller &controller, System::State &state)
+    : controller(&controller), state(&state) {}
 
 /*
  * Run the system processes.
  */
-void System::Process::run() const {}
+void System::Process::run() {
+  if (state->isCoolDownState()) {
+    this->handleCoolDownState();
+  } else if (state->isActiveState()) {
+    this->handleActiveState();
+  } else {
+    this->forceWateringCycle();
+  }
+}
+
+/*
+ * Handle Cool down state of the system..
+ */
+void System::Process::handleCoolDownState() {
+  if (state->isWaterLevelMin()) {
+    controller->closeValve();
+  } else {
+    drainWater();
+  }
+}
+
+/*
+ * Handle Active state of the system.
+ */
+void System::Process::handleActiveState() {
+  if (state->isWaterLevelMax()) {
+    drainWater();
+  } else {
+    if (state->isWaterLevelMin()) {
+      if (state->isMoistureLevelMin()) {
+        fillWater();
+      } else {
+        controller->closeValve();
+      }
+    } else if (!state->isWateringCycleState()) {
+      controller->closeValve();
+    }
+  }
+}
+
+/*
+ * Handle Force watering cycle state of the system.
+ */
+void System::Process::forceWateringCycle() {
+  if (state->isWaterLevelMax()) {
+    drainWater();
+  } else {
+    fillWater();
+  }
+}
+
+/*
+ * Drain water from the Plant Container and set system to cool down state.
+ * Also resets the watering cycle state.
+ */
+void System::Process::drainWater() {
+  controller->turnOffPump();
+  controller->openValve();
+  state->resetWateringCycleState();
+  state->setCoolDownState();
+}
+
+/*
+ * Fill water to the Plant Container and set system to watering cycle state.
+ */
+void System::Process::fillWater() {
+  controller->closeValve();
+
+  controller->turnOnPump();
+
+  state->setWateringCycleState();
+}
